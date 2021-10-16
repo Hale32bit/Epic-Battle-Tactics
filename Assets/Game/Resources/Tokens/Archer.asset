@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d7254259dfd1204fa2d2bea5fd85a2b, type: 3}
+  m_Name: Archer
+  m_EditorClassIdentifier: 
+  _mainTexture: {fileID: 2800000, guid: 0c7688d600880ba43916f2f3016a83c8, type: 3}
+  _iconographicTexture: {fileID: 2800000, guid: 2d9e00c624be5b446ab05c5f418530d2, type: 3}
+  _iconographicTextureRotatable: {fileID: 2800000, guid: 013e518ac64182945b46049325d25d8d, type: 3}
