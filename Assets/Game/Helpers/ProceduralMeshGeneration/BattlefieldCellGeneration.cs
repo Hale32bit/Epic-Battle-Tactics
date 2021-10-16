@@ -21,7 +21,7 @@ namespace ProceduralGeneratedMeshes
 
             mesh.vertices = GenerateVerteces(numOfQuads, vertexPerQuad);
             mesh.triangles = GenerateIndices(numOfQuads, indicesPerQuad);
-            mesh.normals = GenerateNormals(numOfQuads);
+            mesh.normals = GenerateNormals();
             mesh.uv = GenerateUV(numOfQuads);
             GetComponent<MeshFilter>().mesh = mesh;
 
@@ -46,9 +46,9 @@ namespace ProceduralGeneratedMeshes
             return uv;
         }
 
-        private static Vector3[] GenerateNormals(int numOfQuads)
+        private static Vector3[] GenerateNormals()
         {
-            return new Vector3[4 * numOfQuads]
+            var result  = new Vector3[4 * 5]
              {
                  Vector3.up, Vector3.up, Vector3.up, Vector3.up ,
                  Vector3.forward, Vector3.forward, Vector3.forward, Vector3.forward ,
@@ -56,6 +56,7 @@ namespace ProceduralGeneratedMeshes
                  Vector3.back, Vector3.back, Vector3.back, Vector3.back,
                  Vector3.left, Vector3.left, Vector3.left, Vector3.left
              };
+            return result;
         }
 
         private static int[] GenerateIndices(int numOfQuads, int indicesPerQuad)
