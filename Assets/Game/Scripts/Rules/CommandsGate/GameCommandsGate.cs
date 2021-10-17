@@ -1,3 +1,4 @@
+using System.Security.Cryptography.X509Certificates;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,7 +10,6 @@ public class GameCommandsGate : IGameCommandClient, IGameCommandGate, ICommandsB
     public event Action BecomeLocked;
 
     public bool Locked { get; private set; }
-
 
 
     public void Receive(IGameCommand action)
