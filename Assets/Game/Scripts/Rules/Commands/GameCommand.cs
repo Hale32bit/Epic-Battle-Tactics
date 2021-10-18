@@ -16,7 +16,7 @@ public abstract class GameCommand : IGameCommand
         Container = data.Container;
     }
 
-    public bool IsHiliting()
+    public bool IsHighliting()
     {
         return Category == CommandCategory.HighlightOFF
             || Category == CommandCategory.HighlightON;

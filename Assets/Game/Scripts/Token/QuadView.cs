@@ -1,3 +1,4 @@
+using Materials;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -33,6 +34,6 @@ public class QuadView : MonoBehaviour
 
     void Update()
     {
-        _renderer.material.SetMatrix("TextureAzimuth", Matrix4x4.Rotate(Quaternion.Euler(0, 0, -_camera.rotation.eulerAngles.y))) ;
+        _renderer.material.SetMatrix(TokenQuadMaterial.Parameters.TextureAzimuth, Matrix4x4.Rotate(Quaternion.Euler(0, 0, -_camera.rotation.eulerAngles.y))) ;
     }
 }

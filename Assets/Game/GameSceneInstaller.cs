@@ -11,6 +11,7 @@ public class GameSceneInstaller : MonoInstaller
     [SerializeField] private PlayerInput _playerInputPrefab;
     [SerializeField] private Token _tokenPrefab;
     [SerializeField] private Battlefield _battlefieldPrefab;
+    
 
     public override void InstallBindings()
     {
@@ -25,6 +26,15 @@ public class GameSceneInstaller : MonoInstaller
         BindPlayer();
 
         BindActionsGate();
+
+        BindSelector();
+    }
+
+    private void BindSelector()
+    {
+        Container.BindInterfacesTo<Selector>()
+            .FromNewComponentOnNewGameObject()
+            .AsSingle();
     }
 
     private void BindActionsGate()

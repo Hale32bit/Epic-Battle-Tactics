@@ -1,18 +1,33 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class GameState : MonoBehaviour
+namespace GameStates
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+public abstract class GameState 
+{
+    protected readonly IStateSwitcher Switcher;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+        public event Action Started;
+        public event Action Stoped;
+
+        public GameState(IStateSwitcher switcher)
+        {
+            Switcher = switcher;
+        }
+
+        public void Start()
+        {
+            Started?.Invoke();
+        }
+
+        public void Stop()
+        {
+            Stoped?.Invoke();
+        }
+
+        protected void DoNothing() {}
+
+        public abstract void ExecuteCommand(IGameCommand command);
+}
 }

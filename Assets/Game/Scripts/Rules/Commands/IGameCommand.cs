@@ -4,5 +4,5 @@
     ITokenContainer Container { get; }
     Token Token { get; }
 
-    bool IsHiliting();
+    bool IsHighliting();
 }

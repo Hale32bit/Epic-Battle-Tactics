@@ -4,23 +4,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [DisallowMultipleComponent]
-public class BattlefieldCell : TokenContainer, IHiglitable
+public class BattlefieldCell : TokenContainer, IStatable
 {
-    public event Action Highlighted;
-    public event Action HighlightedOFF;
 
+    public event Action<StateType> StateStarted;
+    public event Action<StateType> StateEnded;
 
     public static float PhisicalWidth => ProceduralGeneratedMeshes.BattlefieldCellGeneration.PhisicalNormalizedWidth * 2f;
     public static float PhisicalLenght => ProceduralGeneratedMeshes.BattlefieldCellGeneration.PhisicalNormalizedWidth * 2f;
 
-    void IHiglitable.HiglightOFF()
+    public void StartState(StateType state)
     {
-        HighlightedOFF?.Invoke();
+        StateStarted?.Invoke(state);
     }
 
-    void IHiglitable.HiglightON()
+    public void EndState(StateType state)
     {
-        Highlighted?.Invoke();
-
+        StateEnded?.Invoke(state);
     }
 }

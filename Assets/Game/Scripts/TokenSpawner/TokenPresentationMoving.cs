@@ -1,8 +1,8 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using Zenject;
+using UnityEngine;
 
 [DisallowMultipleComponent]
 [RequireComponent(typeof(TokensSpawner))]
@@ -14,7 +14,6 @@ public class TokenPresentationMoving : MonoBehaviour
         var spawner = GetComponent<TokensSpawner>();
         spawner.Spawned += OnSpawned;
     }
-
     private void OnDisable()
     {
         var spawner = GetComponent<TokensSpawner>();
