@@ -9,8 +9,10 @@ using Zenject;
 [RequireComponent(typeof(BattlefieldCell))]
 public sealed class CellHighlightEffect : ParticleEffect
 {
+    private const float MinimalWorktime = 0.7f;
+
     private void Awake()
     {
-        Launcher = new LauncherWithMinimalWorktime(StateType.Higlighted, 0.7f);
+        Launcher = new LauncherWithMinimalWorktime(StateType.Higlighted, MinimalWorktime);
     }
 }

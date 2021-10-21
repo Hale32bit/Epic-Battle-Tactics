@@ -7,9 +7,7 @@ using Zenject;
 
 [DisallowMultipleComponent]
 public abstract class Player : IAvaliableActionsClient
-{
-    public event Action<GameCommand> ActionGenerated;    
-
+{  
     protected AvaliableActionsList AvaliableActions;
 
     protected IGameCommandClient Client;

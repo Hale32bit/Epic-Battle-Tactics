@@ -1,3 +1,5 @@
+using System.Net;
+using System.ComponentModel;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,7 +29,21 @@ public class GameSceneInstaller : MonoInstaller
 
         BindActionsGate();
 
+        BindCommandExecutors();
+
+    }
+
+    private void BindCommandExecutors()
+    {
         BindSelector();
+
+        BindGame();
+    }
+
+    private void BindGame()
+    {
+        Container.Bind<IGameStatesProvider>().To<Game>()
+        .FromNewComponentOnNewGameObject().AsSingle();
     }
 
     private void BindSelector()

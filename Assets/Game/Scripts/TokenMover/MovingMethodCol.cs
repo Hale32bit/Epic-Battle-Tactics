@@ -19,12 +19,12 @@ namespace TokenMoving
                     typeof(BattlefieldCell),
                     new Dictionary<Type, MovingMethod>()
                     {
-                        { typeof(PreCameraPlane), MoveFromCellToPreCameraPlane },
+                        { typeof(PreCameraPanel), MoveFromCellToPreCameraPlane },
                         { typeof(BattlefieldCell), MoveFromCellToCell },
                     }
                 },
                 {
-                    typeof(PreCameraPlane),
+                    typeof(PreCameraPanel),
                     new Dictionary<Type, MovingMethod>()
                     {
                         { typeof(BattlefieldCell), MoveFromPreCameraPlaneToCell },

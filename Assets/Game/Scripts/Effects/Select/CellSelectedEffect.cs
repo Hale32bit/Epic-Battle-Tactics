@@ -7,8 +7,10 @@ using EffectLaunchers;
 [RequireComponent(typeof(BattlefieldCell))]
 public class CellSelectedEffect : ParticleEffect
 {
+    private const float MinimalWorktime = 0.5f;
+
     private void Awake()
     {
-        Launcher = new LauncherWithMinimalWorktime(StateType.Selected, 0.5f);
+        Launcher = new LauncherWithMinimalWorktime(StateType.Selected, MinimalWorktime);
     }
 }

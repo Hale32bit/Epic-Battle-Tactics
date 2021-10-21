@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,8 +12,6 @@ public class Battlefield : WorldPointerHandler
     [SerializeField] private BattlefieldCell _cellPrefab;
 
     private readonly List<BattlefieldCell> _cells = new List<BattlefieldCell>();
-
-
 
     void Start()
     {
