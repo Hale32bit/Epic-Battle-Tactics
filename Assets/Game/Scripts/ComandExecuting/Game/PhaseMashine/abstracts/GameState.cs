@@ -4,16 +4,28 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace GameStates
 {
-    public abstract class GameState : IGameStatePublisher
+    public abstract class GameState : IGameState
     {
-        protected readonly IStateParent Parent;
-
         public event Action Started;
         public event Action Stoped;
 
-        public GameState(IStateParent parent)
+        private IStateParent _parent;
+        protected IStateParent Parent
         {
-            Parent = parent;
+            get
+            {
+                return _parent;
+            }
+            set
+            {
+                if (value == null)
+                    throw new Exception("Parent cannot be null");
+
+                if (_parent != null)
+                    throw new Exception("Parent already seted");
+
+                _parent = value;
+            }
         }
 
         public void Start()
@@ -29,16 +41,16 @@ namespace GameStates
             OnStoped();
         }
 
-        protected void DoNothing() { }
+        public abstract void Initialize(IStateParent patent);
 
         public abstract void ExecuteCommand(IGameCommand command);
-
-        public abstract IEnumerable<IGameStatePublisher> States();
 
         protected abstract void OnStarted();
 
         protected abstract void OnStoped();
 
         protected abstract void ApplyActionsList();
+
+        protected void DoNothing() { }
     }
 }

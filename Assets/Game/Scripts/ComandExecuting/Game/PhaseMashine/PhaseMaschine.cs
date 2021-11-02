@@ -6,12 +6,8 @@ namespace GameStates
 {
 public sealed class PhaseMaschine : GameStateMachine
 {
-        public PhaseMaschine(IStateParent switcher) : base(switcher)
+        public PhaseMaschine(List<IGameState> states) : base(states)
         {
-            _states = new GameStates.GameState[1]
-                { 
-                    new GameStates.Phase1(this) 
-                };           
         }
 
         protected override void OnStarted() 

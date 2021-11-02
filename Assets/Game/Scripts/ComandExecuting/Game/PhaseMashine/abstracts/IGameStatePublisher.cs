@@ -8,6 +8,5 @@ namespace GameStates
     {
         event Action Started;
         event Action Stoped;
-        IEnumerable<IGameStatePublisher> States();
     }
 }

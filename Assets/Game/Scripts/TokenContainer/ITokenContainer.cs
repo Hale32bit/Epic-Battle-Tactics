@@ -7,6 +7,6 @@ public interface ITokenContainer
     Token GetToken();
 
     void Attach(Token token);
-    void Release();
+    Token Release();
 
 }

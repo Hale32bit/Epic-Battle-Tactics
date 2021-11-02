@@ -1,6 +1,6 @@
 namespace GameStates
 {
-    public interface IStateParent : IAvaliableActionsClient
+    public interface IStateParent
     {
         void SwitchToState<TState>() where TState : GameState;    
     }

@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 
 public enum PointerEventType { Click, Enter, Exit }
 
-public class WorldPointerEventData : IDataForCommand 
+public sealed class WorldPointerEventData : IDataForCommand 
 {
     private readonly List<WorldPointerHandler> _sources = new List<WorldPointerHandler>();
     public WorldPointerHandler OriginalSource => _sources[0];

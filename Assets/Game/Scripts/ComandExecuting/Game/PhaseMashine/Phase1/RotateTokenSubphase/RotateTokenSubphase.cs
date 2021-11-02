@@ -10,7 +10,7 @@ namespace Phase1Space
 {
         public sealed class RotateTokenSubphase : TrueGameState<DefaultActionList>
         {
-            public RotateTokenSubphase(IStateParent parent) : base(parent)
+            public RotateTokenSubphase(IAvaliableActionsClient actionsClient) : base(actionsClient)
             {
             }
 

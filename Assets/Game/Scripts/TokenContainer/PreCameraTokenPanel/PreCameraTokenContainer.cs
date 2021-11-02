@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.Remoting.Messaging;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
-public class PreCameraPanel : TokenContainer
+public sealed class PreCameraTokenContainer : TokenContainer, IPreCameraTokenContainer
 {
     private const float WidthInScreenCoords = 0.16f;
     private const float EdgeIndentInScreenCoords = 0.04f;
@@ -13,10 +10,11 @@ public class PreCameraPanel : TokenContainer
     public const float RightMarginInScreenCoords = 1f - EdgeIndentInScreenCoords;
     public const float BottomMarginInScreenCoords = EdgeIndentInScreenCoords;
 
-
     private float _depthOfPanel;
+
     public Vector3 LocalCenter { get; private set; }
-    
+    public Transform Transform { get => _camera.transform;  }
+
     [SerializeField]
     private GameObject _markerPrefab;
 
@@ -34,7 +32,6 @@ public class PreCameraPanel : TokenContainer
 
         var marker = Instantiate(_markerPrefab, _camera.transform);
         marker.transform.localPosition = LocalCenter;
-
     }
 
     private Vector3 CalculateCenter()

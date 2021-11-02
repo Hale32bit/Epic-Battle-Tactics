@@ -9,7 +9,9 @@ namespace GameStates
     {
         public sealed class PlaceTokenSubphase : TrueGameState<DefaultActionList>
         {
-            public PlaceTokenSubphase(IStateParent parent) : base(parent) { }
+            public PlaceTokenSubphase(IAvaliableActionsClient actionsClient) : base(actionsClient)
+            {
+            }
 
             public override void ExecuteCommand(IGameCommand command)
             {

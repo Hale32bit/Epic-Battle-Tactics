@@ -10,14 +10,8 @@ namespace GameStates
 
 public sealed class Phase1 : GameStates.GameStateMachine
 {
-        public Phase1(IStateParent switcher) : base(switcher)
+        public Phase1(List<IGameState> states) : base(states)
         {
-            _states = new GameState[3] 
-            {
-                new TakeTokenSubphase(this),
-                new PlaceTokenSubphase(this),
-                new RotateTokenSubphase(this)
-            };
         }
 
         protected override void OnStarted()

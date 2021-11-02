@@ -3,5 +3,6 @@
     HighlightON, 
     HighlightOFF,
     Select,
-    Targeting
+    Targeting,
+    Take
 }

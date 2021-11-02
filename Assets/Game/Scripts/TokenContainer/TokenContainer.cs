@@ -22,12 +22,14 @@ public abstract class TokenContainer : WorldPointerHandler, ITokenContainer
         return Token;
     }
 
-    public void Release()
+    public Token Release()
     {
-        if (Token != null)
-        {
-            UnsubscribeFromChild(Token);
-            Token = null;
-        }
+        Token token = Token;
+        Token = null;
+
+        if (token != null)
+            UnsubscribeFromChild(token);
+        
+        return token;
     }
 }

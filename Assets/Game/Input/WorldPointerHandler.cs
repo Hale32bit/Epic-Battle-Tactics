@@ -59,6 +59,4 @@ public abstract class WorldPointerHandler : MonoBehaviour, IPointerClickHandler,
         var worldData = new WorldPointerEventData(this, PointerEventType.Exit);
         PointerExit?.Invoke(worldData);
     }
-
-
 }

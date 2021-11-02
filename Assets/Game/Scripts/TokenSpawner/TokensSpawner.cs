@@ -1,41 +1,31 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Remoting.Messaging;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
 [DisallowMultipleComponent]
-public class TokensSpawner : MonoBehaviour
+public class TokensSpawner : MonoBehaviour, ITokenSpawner
 {
-    public event Action<Token> Spawned;
-
-    private InputAction _spawnAction;
     private Token.Factory _factory;
+    private ISpawnedTokenContainer _spawnedTokenContainer;
 
     [Inject]
-    private void Construct(InputActions input, Token.Factory factory)
+    private void Construct(Token.Factory factory, ISpawnedTokenContainer spawnedTokenContainer)
     {
         _factory = factory;
-        _spawnAction = input.Player.SpawnToken;
+        _spawnedTokenContainer = spawnedTokenContainer;
     }
 
-    private void OnEnable()
-    {
-        _spawnAction.performed += OnSpawnAction;
-        _spawnAction.Enable();
-    }
-
-    private void OnDisable()
-    {
-        _spawnAction.performed -= OnSpawnAction;
-        _spawnAction.Disable();
-    }
-
-    private void OnSpawnAction(InputAction.CallbackContext obj)
+    public ISpawnedTokenContainer Spawn()
     {
         var token = _factory.Create();
         token.transform.SetPositionAndRotation(this.transform.position, Quaternion.identity);
-        Spawned?.Invoke(token);
+        _spawnedTokenContainer.Attach(token);
+        return _spawnedTokenContainer;
     }
+
+
 }

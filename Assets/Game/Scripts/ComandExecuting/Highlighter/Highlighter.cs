@@ -9,7 +9,6 @@ using Zenject;
 public sealed class Highlighter : CommandExecutor
 {
     private IStatable _higlited;
-
     private ISelector _selector;
 
     [Inject]
@@ -55,7 +54,6 @@ public sealed class Highlighter : CommandExecutor
 
     private bool TryHighlightON(IStatable obj)
     {
-        Debug.Log(_selector.IsSelected(obj));
         if (_selector.IsSelected(obj))
             return false;
 

@@ -8,11 +8,19 @@ namespace GameStates
 {
     public abstract class GameStateMachine : GameState, IStateParent
     {
-        private GameState _currentState;
-        protected GameState[] _states;
+        private IGameState _currentState;
+        private readonly List<IGameState> _states;
 
-        public GameStateMachine(IStateParent switcher) : base(switcher)
+        public GameStateMachine(List<IGameState> states) 
         {
+            _states = states;
+        }
+
+        public override sealed void Initialize(IStateParent parent)
+        {
+            Parent = parent;
+            foreach (var state in _states)
+                state.Initialize(this);
         }
 
         void IStateParent.SwitchToState<TState>() 
@@ -23,19 +31,6 @@ namespace GameStates
         }
 
         public override sealed void ExecuteCommand(IGameCommand command) => _currentState.ExecuteCommand(command);
-
-        void IAvaliableActionsClient.Receive(AvaliableActionsList actions)
-        {
-            this.Parent.Receive(actions);
-        }
-
-        public override IEnumerable<IGameStatePublisher> States()
-        {
-            IEnumerable<IGameStatePublisher> enumerable = _states;
-            foreach (var state in _states)
-                enumerable = enumerable.Concat(state.States());
-            return enumerable;
-        }
 
         protected override sealed void ApplyActionsList() => DoNothing();        
     }

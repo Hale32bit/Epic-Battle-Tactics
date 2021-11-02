@@ -6,21 +6,21 @@ using UnityEngine;
 using Zenject;
 using GameStates;
 
-public sealed class Game : CommandExecutor, IGameStatesProvider, IStateParent
+public sealed class Game : CommandExecutor, IStateParent
 {
-    private IAvaliableActionsClient _client;
 
-    private PhaseMaschine _phases;
+
+    private IGameState _phases;
 
     [Inject]
-    private void Construct(IAvaliableActionsClient client)
+    private void Construct(IGameState phaseMashine)
     {
-        _client = client;
-        _phases = new PhaseMaschine(this);
+        _phases = phaseMashine;
     }
 
     void Start()
     {
+        _phases.Initialize(this);
         _phases.Start();
     }
 
@@ -39,18 +39,9 @@ public sealed class Game : CommandExecutor, IGameStatesProvider, IStateParent
         Debug.Log(command.Category.ToString());
     }
 
-    public IGameStatePublisher GetGameState<TState>() where TState : IGameStatePublisher
-    {
-        return _phases.States().First(state => state is TState);
-    }
 
     void IStateParent.SwitchToState<TState>()
     {
         throw new NotImplementedException();
-    }
-
-    void IAvaliableActionsClient.Receive(AvaliableActionsList actions)
-    {
-        _client.Receive(actions);
     }
 }
