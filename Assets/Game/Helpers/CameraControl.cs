@@ -20,6 +20,8 @@ public class CameraControl : MonoBehaviour
     private Vector3 _movingVector;
     private float _rotatingAxis;
 
+    [SerializeField] private CameraRotationModel RotationModel;
+
     [Inject]
     private void Construct(InputActions inputActions, Camera camera)
     {
@@ -62,7 +64,14 @@ public class CameraControl : MonoBehaviour
 
     private void OnRotate(InputAction.CallbackContext obj)
     {
-        _rotatingAxis = obj.action.ReadValue<float>();
+        // _rotatingAxis = obj.action.ReadValue<float>();
+        var actionValue = obj.action.ReadValue<float>();
+
+        if (actionValue > 0)
+            RotationModel.NextForeshorteningToRight();
+        //if (actionValue < 0)
+        //    RotationModel.NextForeshorteningToLeft();
+
     }
 
     void Update()
