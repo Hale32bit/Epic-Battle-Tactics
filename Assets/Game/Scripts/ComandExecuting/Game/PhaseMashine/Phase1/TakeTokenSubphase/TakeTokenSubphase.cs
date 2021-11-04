@@ -28,7 +28,6 @@ namespace GameStates
 
             private void TakeToken()
             {
-                Debug.Log("hi");
                 _taker.Take();
                 Parent.SwitchToState<PlaceTokenSubphase>();
             }

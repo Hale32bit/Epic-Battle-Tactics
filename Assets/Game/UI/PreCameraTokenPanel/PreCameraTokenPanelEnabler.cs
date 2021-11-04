@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
+[NeedsGamePhase(typeof(GameStates.Phase1Space.TakeTokenSubphase))]
 [DisallowMultipleComponent]
 [RequireComponent(typeof(CanvasGroup), typeof(Animator))]
 public class PreCameraTokenPanelEnabler : MonoBehaviour

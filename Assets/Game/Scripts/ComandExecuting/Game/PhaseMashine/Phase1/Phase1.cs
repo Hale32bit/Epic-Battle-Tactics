@@ -8,7 +8,10 @@ using GameStates.Phase1Space;
 namespace GameStates
 {
 
-public sealed class Phase1 : GameStates.GameStateMachine
+    [NeedsGamePhase(typeof(TakeTokenSubphase))]
+    [NeedsGamePhase(typeof(PlaceTokenSubphase))]
+    [NeedsGamePhase(typeof(RotateTokenSubphase))]
+    public sealed class Phase1 : GameStates.GameStateMachine
 {
         public Phase1(List<IGameState> states) : base(states)
         {

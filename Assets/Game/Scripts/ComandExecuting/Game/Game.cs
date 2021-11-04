@@ -6,6 +6,7 @@ using UnityEngine;
 using Zenject;
 using GameStates;
 
+[NeedsGamePhase(typeof(PhaseMaschine))]
 public sealed class Game : CommandExecutor, IStateParent
 {
 
