@@ -6,37 +6,30 @@ using AvaliableActions;
 
 namespace GameStates
 {
-namespace Phase1Space
-{
-public sealed class TakeTokenSubphase : TrueGameState<TakeTokenActionsList>
+    namespace Phase1Space
+    {
+        public sealed class TakeTokenSubphase : TrueGameState<TakeTokenActionsList>
         {
-            private ITokenMover _tokenMover;
-            private ITokenSpawner _tokensSpawner;
-            private IPreCameraTokenContainer _preCamera;
+            private INewTokenTaker _taker;
 
-                public TakeTokenSubphase(
-                    IAvaliableActionsClient actionsClient, 
-                    ITokenMover tokenMover, 
-                    ITokenSpawner tokensSpawner,
-                    IPreCameraTokenContainer preCamera) 
-                : base(actionsClient)
+            public TakeTokenSubphase(
+                IAvaliableActionsClient actionsClient,
+                INewTokenTaker taker)
+            : base(actionsClient)
             {
-                _tokenMover = tokenMover;
-                _tokensSpawner = tokensSpawner;
-                _preCamera = preCamera;
+                _taker = taker;
             }
 
             public override void ExecuteCommand(IGameCommand command)
             {
-                if(command.Category ==  CommandCategory.Take)
+                if (command.Category == CommandCategory.Take)
                     TakeToken();
             }
 
             private void TakeToken()
             {
-                var initial = _tokensSpawner.Spawn();
-                _tokenMover.MoveToken(initial, _preCamera);
-
+                Debug.Log("hi");
+                _taker.Take();
                 Parent.SwitchToState<PlaceTokenSubphase>();
             }
 
@@ -44,6 +37,6 @@ public sealed class TakeTokenSubphase : TrueGameState<TakeTokenActionsList>
 
             protected override void OnStoped() => DoNothing();
 
-}
-}
+        }
+    }
 }

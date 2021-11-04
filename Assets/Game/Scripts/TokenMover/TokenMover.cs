@@ -6,12 +6,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public sealed class TokenMover : ITokenMover
+public abstract class TokenMover 
 {
     private ICommandsBlocker _commandBlocker;
     
-    [Inject]
-    private void Construct(ICommandsBlocker commandBlocker)
+    public TokenMover(ICommandsBlocker commandBlocker)
     {
         _commandBlocker = commandBlocker;
     }
@@ -20,7 +19,8 @@ public sealed class TokenMover : ITokenMover
     {
         Tween tween = GenerateTweenForMoving((dynamic)initial, (dynamic)target);
 
-        LockCommandsUntilMovingComplited(tween);
+        if (tween != null)
+            LockCommandsUntilMovingComplited(tween);
 
         Reattach(initial, target);
     }
@@ -37,8 +37,6 @@ public sealed class TokenMover : ITokenMover
         tween.OnComplete(new TweenCallback(() => _commandBlocker.Unlock()));
     }
 
-    private Tween GenerateTweenForMoving(SpawnedTokenContainer initial, IPreCameraTokenContainer target)
-    {
-        return initial.GetToken().transform.DOMove(target.Transform.TransformPoint(target.LocalCenter), 2);
-    }
+    protected abstract Tween GenerateTweenForMoving(ITokenContainer initial, ITokenContainer target);
+
 }

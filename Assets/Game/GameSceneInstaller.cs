@@ -34,20 +34,19 @@ public class GameSceneInstaller : MonoInstaller
 
         BindCommandExecutors();
 
-        BindPhaseMashine();
-
         BindUI();
 
         BindTokenSpawner();
 
-        Container.BindInterfacesAndSelfTo<TokenMover>()
+        GamePhasesInstaller.Install(Container);
+
+        Container.BindInterfacesAndSelfTo<NewTokenTaker>()
             .FromNew()
             .AsSingle();
     }
 
     private void BindTokenSpawner()
     {
-
         BindSpawnedTokenContainer();
 
         BindTokenFactory();
@@ -79,46 +78,10 @@ public class GameSceneInstaller : MonoInstaller
             .AsSingle();
     }
 
-    private void BindPhaseMashine()
-    {
-        Container.BindInterfacesTo<PhaseMaschine>()
-            .AsSingle()
-            .WhenInjectedInto(typeof(Game));
-
-        BindPhase1();
-    }
-
-    private void BindPhase1()
-    {
-        Container.BindInterfacesTo<Phase1>()
-            .AsSingle()
-            .WhenInjectedInto(typeof(PhaseMaschine));
-
-        Container.BindInterfacesTo<RotateTokenSubphase>()
-            .AsSingle()
-            .WhenInjectedInto(typeof(Phase1));
-
-        Container.BindInterfacesTo<TakeTokenSubphase>()
-            .AsSingle()
-            .WhenInjectedInto(
-            typeof(Phase1), 
-            typeof(PreCameraTokenPanelEnabler));
-
-
-
-        Container.BindInterfacesTo<PlaceTokenSubphase>()
-            .AsSingle()
-            .WhenInjectedInto(typeof(Phase1));
-    }
-
     private void BindCommandExecutors()
     {
         BindSelector();
-
-
     }
-
-
 
     private void BindSelector()
     {
@@ -165,5 +128,45 @@ public class GameSceneInstaller : MonoInstaller
         Container.Bind<Battlefield>()
             .FromComponentInNewPrefab(_battlefieldPrefab)
             .AsSingle();
+    }
+}
+
+internal class GamePhasesInstaller : Installer<GamePhasesInstaller>
+{
+    public override void InstallBindings()
+    {
+        BindPhaseMashine();
+    }
+
+    private void BindPhaseMashine()
+    {
+        Container.BindInterfacesTo<PhaseMaschine>()
+            .AsSingle()
+            .WhenInjectedInto(typeof(Game));
+
+        BindPhase1();
+    }
+
+    private void BindPhase1()
+    {
+        Container.BindInterfacesTo<Phase1>()
+            .AsSingle()
+            .WhenInjectedInto(typeof(PhaseMaschine));
+
+        Container.BindInterfacesTo<RotateTokenSubphase>()
+            .AsSingle()
+            .WhenInjectedInto(typeof(Phase1));
+
+        Container.BindInterfacesTo<TakeTokenSubphase>()
+            .AsSingle()
+            .WhenInjectedInto(
+            typeof(Phase1),
+            typeof(PreCameraTokenPanelEnabler));
+
+
+
+        Container.BindInterfacesTo<PlaceTokenSubphase>()
+            .AsSingle()
+            .WhenInjectedInto(typeof(Phase1));
     }
 }

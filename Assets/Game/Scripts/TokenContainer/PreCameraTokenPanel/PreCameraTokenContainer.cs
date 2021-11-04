@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Zenject;
 
+[DisallowMultipleComponent]
 public sealed class PreCameraTokenContainer : TokenContainer, IPreCameraTokenContainer
 {
     private const float WidthInScreenCoords = 0.16f;
