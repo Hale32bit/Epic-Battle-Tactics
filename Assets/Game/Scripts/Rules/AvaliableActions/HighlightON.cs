@@ -4,7 +4,6 @@ namespace AvaliableActions
 {
     public class HighlightON : AvaliableAction
     {
-
         public HighlightON()
         {
             _command = new GameCommands.HiglightON();

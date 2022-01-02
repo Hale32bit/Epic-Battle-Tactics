@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public abstract class TokenContainer : WorldPointerHandler, ITokenContainer
 {
     private Token Token;

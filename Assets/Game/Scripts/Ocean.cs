@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [DisallowMultipleComponent]
+[RequireComponent(typeof(MeshRenderer))]
 public class Ocean : MonoBehaviour
 {
-    public const float YLevel = -3f;
+    [SerializeField] private float _yLevel = -3f;
 
     void Start()
     {
-        this.transform.position = Vector3.up * YLevel;
+        this.transform.position = Vector3.up * _yLevel;
+        GetComponent<MeshRenderer>().enabled = true;
     }
 }

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5636941993669529907}
   - component: {fileID: 5636941993669529904}
   - component: {fileID: 5636941993669529935}
+  - component: {fileID: 585712221323442823}
   m_Layer: 0
   m_Name: Quad
   m_TagString: Untagged
@@ -123,6 +124,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 8bed1d42a4b925549bdb0251347fee00, type: 2}
+--- !u!114 &585712221323442823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5636941993669529905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f7cc52480fac68408c65954fc5ec7a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5636941994569653372
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,6 +227,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5636941994727232787}
   - component: {fileID: 1102307851559699056}
+  - component: {fileID: 6877100736653298825}
   m_Layer: 0
   m_Name: Token
   m_TagString: Untagged
@@ -249,3 +263,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6b671e0b7bb65f4a9c46ae2cb0420c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &6877100736653298825
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5636941994727232784}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}

@@ -9,8 +9,6 @@ using GameStates;
 [NeedsGamePhase(typeof(PhaseMaschine))]
 public sealed class Game : CommandExecutor, IStateParent
 {
-
-
     private IGameState _phases;
 
     [Inject]
@@ -39,7 +37,6 @@ public sealed class Game : CommandExecutor, IStateParent
 
         Debug.Log(command.Category.ToString());
     }
-
 
     void IStateParent.SwitchToState<TState>()
     {

@@ -1,3 +1,4 @@
+using Codice.Client.BaseCommands.CheckIn.Progress;
 using Materials;
 using System;
 using System.Collections;
@@ -7,21 +8,36 @@ using Zenject;
 
 [DisallowMultipleComponent]
 [RequireComponent(typeof(MeshRenderer))]
+[RequireComponent(typeof(TokenTextureAzimuthPresenter))]
 public class QuadView : MonoBehaviour
 {
-    [SerializeField]
-    private TokenData _tokenData;
+    [SerializeField] private TokenData _tokenData;
 
-    private Transform _camera;
     private MeshRenderer _renderer;
+    private TokenTextureAzimuthPresenter _presenter;
 
-    [Inject]
-    private void Construct(Camera camera)
-    {
-        _camera = camera.transform;
+    private float _currentAthimuth = 0;
+    private const float Speed = 200f;
+
+    private void Start()
+    { 
         _renderer = GetComponent<MeshRenderer>();
+        _presenter = GetComponent<TokenTextureAzimuthPresenter>();
 
+        _presenter.TargetAzimuthChanged += OnAzimuthStepChanged;
+        UpdateTextureAzimuth();
         SetTokenData(_tokenData);
+        this.enabled = false;
+    }
+
+    private void OnDestroy()
+    {
+        _presenter.TargetAzimuthChanged -= OnAzimuthStepChanged;
+    }
+
+    private void OnAzimuthStepChanged()
+    {
+        this.enabled = true;
     }
 
     private void SetTokenData(TokenData data)
@@ -34,6 +50,18 @@ public class QuadView : MonoBehaviour
 
     void Update()
     {
-        _renderer.material.SetMatrix(TokenQuadMaterial.Parameters.TextureAzimuth, Matrix4x4.Rotate(Quaternion.Euler(0, 0, -_camera.rotation.eulerAngles.y))) ;
+        _currentAthimuth = Mathf.MoveTowardsAngle(_currentAthimuth, _presenter.TargetAthimuth, Speed * Time.deltaTime);
+
+        UpdateTextureAzimuth();
+
+        if (_currentAthimuth == _presenter.TargetAthimuth)
+            this.enabled = false;
+    }
+
+    private void UpdateTextureAzimuth()
+    {
+        _renderer.material.SetMatrix(
+            TokenQuadMaterial.Parameters.TextureAzimuth, 
+            Matrix4x4.Rotate(Quaternion.Euler(0, 0,  -_currentAthimuth)));
     }
 }

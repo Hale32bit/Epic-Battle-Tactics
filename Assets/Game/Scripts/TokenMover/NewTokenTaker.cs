@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using UnityEngine;
 
 public sealed class NewTokenTaker : TokenMover , INewTokenTaker 
 {
@@ -30,7 +31,13 @@ public sealed class NewTokenTaker : TokenMover , INewTokenTaker
 
     protected override Tween GenerateTweenForMoving(ITokenContainer initial, ITokenContainer target)
     {
-        return initial.GetToken().transform.DOLocalMove(
-            _preCamera.Transform.TransformPoint(_preCamera.LocalCenter), 2);
+        const float duration = 1f;
+
+        var sequence = DOTween.Sequence();
+        sequence.Append(initial.GetToken().transform.DOLocalMove(_preCamera.LocalCenter, duration));
+        sequence.Join(initial.GetToken().transform
+            .DOLocalRotate(new Vector3(-90f, 0 ,0) , duration, RotateMode.Fast));
+
+        return sequence;
     }
 }

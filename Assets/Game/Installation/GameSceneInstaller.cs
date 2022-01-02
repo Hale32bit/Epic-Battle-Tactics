@@ -9,13 +9,15 @@ using Zenject;
 public class GameSceneInstaller : MonoInstaller
 {
     [SerializeField] private Camera _camera;
+    [SerializeField] private CameraRotation _cameraRotaion;
     [SerializeField] private PlayerInput _playerInputPrefab;
     [SerializeField] private Token _tokenPrefab;
     [SerializeField] private Battlefield _battlefieldPrefab;
     [SerializeField] private PreCameraTokenButton _preCameraTokenPanel;
 
     [SerializeField] private GameObject _tokensSpawner;
-    
+    [SerializeField] private GameObject _cameraRotationCenter;
+
 
     public override void InstallBindings()
     {
@@ -39,6 +41,14 @@ public class GameSceneInstaller : MonoInstaller
 
         Container.BindInterfacesAndSelfTo<NewTokenTaker>()
             .FromNew()
+            .AsSingle();
+
+        Container.Bind<CameraRotationModel>()
+            .FromComponentOn(_cameraRotationCenter)
+            .AsSingle();
+
+        Container.Bind<CameraRotation>()
+            .FromInstance(_cameraRotaion)
             .AsSingle();
     }
 

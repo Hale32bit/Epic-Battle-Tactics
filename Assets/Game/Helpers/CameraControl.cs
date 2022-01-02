@@ -66,11 +66,12 @@ public class CameraControl : MonoBehaviour
     {
         // _rotatingAxis = obj.action.ReadValue<float>();
         var actionValue = obj.action.ReadValue<float>();
+        Debug.Log("hi");
 
         if (actionValue > 0)
             RotationModel.NextForeshorteningToRight();
-        //if (actionValue < 0)
-        //    RotationModel.NextForeshorteningToLeft();
+        if (actionValue < 0)
+            RotationModel.NextForeshorteningToLeft();
 
     }
 

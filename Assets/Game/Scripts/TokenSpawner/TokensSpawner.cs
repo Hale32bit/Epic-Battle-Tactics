@@ -22,7 +22,7 @@ public class TokensSpawner : MonoBehaviour, ITokenSpawner
     public ISpawnedTokenContainer Spawn()
     {
         var token = _factory.Create();
-        token.transform.SetPositionAndRotation(this.transform.position, Quaternion.identity);
+        token.transform.SetPositionAndRotation(this.transform.position, this.transform.rotation);
         _spawnedTokenContainer.Attach(token);
         return _spawnedTokenContainer;
     }

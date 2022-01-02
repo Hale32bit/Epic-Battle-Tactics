@@ -6,7 +6,6 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class BattlefieldCell : TokenContainer, IStatable
 {
-
     public event Action<StateType> StateStarted;
     public event Action<StateType> StateEnded;
 

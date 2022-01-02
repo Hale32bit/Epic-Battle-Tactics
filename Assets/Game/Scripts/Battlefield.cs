@@ -24,8 +24,9 @@ public class Battlefield : WorldPointerHandler
     {
         var cell = GameObject.Instantiate(_cellPrefab, this.gameObject.transform);
         
-        Vector3 leftForwardCornerOffset = (Vector3.forward * (float)Lenght * BattlefieldCell.PhisicalLenght +
-            Vector3.left * (float)Width * BattlefieldCell.PhisicalWidth) / 2f;
+        Vector3 leftForwardCornerOffset = (
+            Vector3.forward * (float)(Lenght -1) * BattlefieldCell.PhisicalLenght +
+            Vector3.left * (float)(Width -1) * BattlefieldCell.PhisicalWidth) / 2f;
 
         cell.transform.position = 
             leftForwardCornerOffset +
@@ -34,11 +35,5 @@ public class Battlefield : WorldPointerHandler
 
         this.SubscribeToChild(cell);
         _cells.Add(cell);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

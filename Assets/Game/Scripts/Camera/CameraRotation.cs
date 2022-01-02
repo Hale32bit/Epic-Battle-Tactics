@@ -1,22 +1,26 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using Zenject;
 
 [DisallowMultipleComponent]
-[RequireComponent(typeof(CameraRotationModel))]
 public sealed class CameraRotation : MonoBehaviour
 {
-    private CameraRotationModel _model;
+    public event Action Updated;
 
-    private float _targetAngle = 0;
+    private CameraRotationModel _model;
 
     [SerializeField] private  float _rotationSpeed = 150;
 
+    [Inject]
+    private void Construct(CameraRotationModel model)
+    {
+        _model = model;
+    }
+
     private void Awake()
     {
-        _model = GetComponent<CameraRotationModel>();
         _model.ForeshorteningChanged += OnForeshorteningChanged;
-        //this.enabled = false;
-
-        Debug.Log("hi");
+        this.enabled = false;
     }
 
     private void OnDestroy()
@@ -26,19 +30,19 @@ public sealed class CameraRotation : MonoBehaviour
 
     private void OnForeshorteningChanged()
     {
-        const float anglePerStep = 90f;
-        _targetAngle = (float)_model.ForeshorteningStep * anglePerStep;
         this.enabled = true;
     }
 
     private void Update()
     {
-        float currentAngle = this.transform.rotation.eulerAngles.y;
+        float currentAzimuth = this.transform.rotation.eulerAngles.y;
 
-        float newAngle = Mathf.MoveTowardsAngle(currentAngle, _targetAngle, Time.deltaTime * _rotationSpeed);
-        transform.rotation = Quaternion.Euler(0, newAngle, 0);
+        float newAzimuth = Mathf.MoveTowardsAngle(currentAzimuth, _model.TargetCameraAzimuth, Time.deltaTime * _rotationSpeed);
+        transform.rotation = Quaternion.Euler(0, newAzimuth, 0);
 
-        if (newAngle == _targetAngle)
+        Updated?.Invoke();
+
+        if (newAzimuth == _model.TargetCameraAzimuth)
             this.enabled = false;
     }
 }
