@@ -6,7 +6,7 @@ namespace AvaliableActions
     {
         public HighlightON()
         {
-            _command = new GameCommands.HiglightON();
+            Command = new GameCommands.HiglightON();
         }
 
         protected override bool PredicateForData(IDataForCommand data)

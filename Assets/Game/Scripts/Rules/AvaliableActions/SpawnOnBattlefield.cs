@@ -6,7 +6,7 @@ namespace AvaliableActions
     {
         public SpawnOnBattlefield()
         {
-            _command = new GameCommands.SpawnOnBattlefield();
+            Command = new GameCommands.SpawnOnBattlefield();
         }
 
         protected override bool PredicateForData(IDataForCommand data)

@@ -6,12 +6,11 @@ namespace GameStates.Phase1Space
     {
         public TakeTokenAction()
         {
-           _command = new TakeTokenCommand();
+           Command = new TakeTokenCommand();
         }
 
         protected override bool PredicateForData(IDataForCommand data)
         {
-
             return data.OriginalSource is PreCameraTokenButton
                  && data.EventType == PointerEventType.Click;
         }

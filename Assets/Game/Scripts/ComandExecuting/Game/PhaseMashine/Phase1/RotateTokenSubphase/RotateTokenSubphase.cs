@@ -8,15 +8,25 @@ namespace GameStates
 {
 namespace Phase1Space
 {
-        public sealed class RotateTokenSubphase : TrueGameState<DefaultActionList>
+        public sealed class RotateTokenSubphase : TrueGameState<RotateTokenActionsList>
         {
-            public RotateTokenSubphase(IAvaliableActionsClient actionsClient) : base(actionsClient)
+            private CellPanel _cellPanel;
+           // private ISelector _selector;
+
+
+            public RotateTokenSubphase(
+                IAvaliableActionsClient actionsClient,
+                CellPanel cellPanel,
+                ISelector selector) 
+                : base(actionsClient)
             {
+                _cellPanel = cellPanel;
+              //  _selector = selector;
             }
 
             public override void ExecuteCommand(IGameCommand command)
             {
-                throw new System.NotImplementedException();
+
             }
 
             protected override void OnStarted() => DoNothing();

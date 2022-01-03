@@ -4,10 +4,9 @@ namespace AvaliableActions
 {
     public class HighlightOFF : AvaliableAction
     {
-
         public HighlightOFF()
         {
-            _command = new GameCommands.HiglightOFF();
+            Command = new GameCommands.HiglightOFF();
         }
 
         protected override bool PredicateForData(IDataForCommand data)

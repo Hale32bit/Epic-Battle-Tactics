@@ -17,18 +17,22 @@ public sealed class Selector : CommandExecutor, ISelector
         if (command.Category != CommandCategory.Targeting)
             return;
 
-        if (SelectedObject != null)
-            SelectedObject.Deselect();
+        Deselect();
 
         SelectedObject = command.Container as IStatable;
         SelectedObject.Select();
         Selected?.Invoke(SelectedObject);
+    }
 
-        
+    private void Deselect()
+    {
+        if (SelectedObject != null)
+            SelectedObject.Deselect();
+        SelectedObject = null;
     }
 
     protected override void OnGateLocked()
     {
-        
+        Deselect();
     }
 }

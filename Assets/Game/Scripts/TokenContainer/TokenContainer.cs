@@ -6,6 +6,9 @@ using UnityEngine;
 public abstract class TokenContainer : WorldPointerHandler, ITokenContainer
 {
     private Token Token;
+    public bool IsEmpty => Token == null;
+
+    public Transform Transform => this.transform;
 
     public void Attach(Token token)
     {

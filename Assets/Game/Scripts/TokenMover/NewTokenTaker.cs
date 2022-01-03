@@ -33,10 +33,11 @@ public sealed class NewTokenTaker : TokenMover , INewTokenTaker
     {
         const float duration = 1f;
 
+        var transform = initial.GetToken().transform;
+
         var sequence = DOTween.Sequence();
-        sequence.Append(initial.GetToken().transform.DOLocalMove(_preCamera.LocalCenter, duration));
-        sequence.Join(initial.GetToken().transform
-            .DOLocalRotate(new Vector3(-90f, 0 ,0) , duration, RotateMode.Fast));
+        sequence.Append(transform.DOLocalMove(_preCamera.LocalCenter, duration));
+        sequence.Join(transform.DOLocalRotate(new Vector3(-90f, 0 ,0) , duration, RotateMode.Fast));
 
         return sequence;
     }

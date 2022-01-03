@@ -6,9 +6,9 @@ namespace AvaliableActions
         {
             Avaliables = new AvaliableAction[]
             { 
-            new AvaliableActions.SpawnOnBattlefield(),
-            new AvaliableActions.HighlightON(),
-            new AvaliableActions.HighlightOFF()
+             new AvaliableActions.SpawnOnBattlefield(),
+             new AvaliableActions.HighlightON(),
+             new AvaliableActions.HighlightOFF()
             };
         }
     }

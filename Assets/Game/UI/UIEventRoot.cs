@@ -6,21 +6,26 @@ using Zenject;
 
 public sealed class UIEventRoot : WorldPointerHandler
 {
-    private PreCameraTokenButton _panel;
+    private PreCameraTokenButton _tokenPanel;
+    private CellPanel _cellPanel;
 
     [Inject]
-    private void Construct(PreCameraTokenButton panel)
+    private void Construct(
+        PreCameraTokenButton tokenPanel, CellPanel cellPanel)
     {
-        _panel = panel;     
+        _tokenPanel = tokenPanel;
+        _cellPanel = cellPanel;
     }
 
     private void OnEnable()
     {
-        SubscribeToChild(_panel);
+        SubscribeToChild(_tokenPanel);
+        SubscribeToChild(_cellPanel);
     }
 
     private void OnDisable()
     {
-        UnsubscribeFromChild(_panel);
+        UnsubscribeFromChild(_tokenPanel);
+        UnsubscribeFromChild(_cellPanel);
     }
 }

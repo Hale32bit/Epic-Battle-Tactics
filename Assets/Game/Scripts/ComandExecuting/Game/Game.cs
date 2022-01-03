@@ -23,11 +23,6 @@ public sealed class Game : CommandExecutor, IStateParent
         _phases.Start();
     }
 
-    private AvaliableActionsList GenerateSimpleActionList()
-    {
-        return new AvaliableActions.DefaultActionList();
-    }
-
     protected override void OnGateLocked()
     { }
 

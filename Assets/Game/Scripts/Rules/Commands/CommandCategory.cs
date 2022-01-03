@@ -4,5 +4,9 @@
     HighlightOFF,
     Select,
     Targeting,
-    Take
+    Take,
+    Accept,
+    Cancel,
+    ClockwiseRotate,
+    CounterClockwiseRotate
 }

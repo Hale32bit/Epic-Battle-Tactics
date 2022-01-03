@@ -3,6 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [DisallowMultipleComponent]
-public sealed class CellPanelCentralButton : WorldPointerHandler
+public sealed class CellAcceptButton : WorldPointerHandler
 {
 }

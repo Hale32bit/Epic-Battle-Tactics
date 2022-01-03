@@ -6,7 +6,7 @@ using UnityEngine;
 
 public abstract class AvaliableAction 
 {
-    protected GameCommand _command;
+    protected GameCommand Command;
 
     protected virtual bool PredicateForObject(GameObject obj)
     {
@@ -29,8 +29,8 @@ public abstract class AvaliableAction
 
         if (isSuccess)
         { 
-            _command.Configure(data);
-            command = _command;
+            Command.Configure(data);
+            command = Command;
         }
         else
             command = null;
