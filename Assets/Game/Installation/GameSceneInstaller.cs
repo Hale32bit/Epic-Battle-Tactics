@@ -22,6 +22,8 @@ public class GameSceneInstaller : MonoInstaller
     [SerializeField] private CellPanelConfig _placeCellPanelConfig;
     [SerializeField] private CellPanelConfig _rotateCellPanelConfig;
 
+    [SerializeField] private TokenRotator _tokenRotator;
+
     public override void InstallBindings()
     {
         BindCamera();
@@ -72,6 +74,10 @@ public class GameSceneInstaller : MonoInstaller
 
         Container.BindInterfacesAndSelfTo<TokenPlacer>()
             .FromNew()
+            .AsSingle();
+
+        Container.BindInterfacesAndSelfTo<TokenRotator>()
+            .FromInstance(_tokenRotator)
             .AsSingle();
     }
 

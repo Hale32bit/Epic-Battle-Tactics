@@ -25,15 +25,27 @@ public class BillboardPresenter : MonoBehaviour
 
     public void Reveal()
     {
-        StopCoroutine();
+        if (Visible)
+        {
+            VisibilityChangingFinished?.Invoke(this);
+            return;
+        }
+        
         Visible = true;
+        StopCoroutine();
         _activeCoroutine = StartCoroutine(VisibilityChanging(1f));
     }
 
     public void Hide()
     {
-        StopCoroutine();
+        if (Visible == false)
+        {
+            VisibilityChangingFinished?.Invoke(this);
+            return;
+        }
+
         Visible = false;
+        StopCoroutine();
         _activeCoroutine = StartCoroutine(VisibilityChanging(0f));
     }
 

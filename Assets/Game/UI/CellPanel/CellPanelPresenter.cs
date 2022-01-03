@@ -75,20 +75,6 @@ public sealed class CellPanelPresenter : MonoBehaviour
         }
     }
 
-    private void OnVisibleChanged(bool value)
-    {
-        if (_destinationChangingCoroutine != null)
-            return;
-
-        LaunchVisibleChanging();
-    }
-
-    private void LaunchVisibleChanging()
-    {
-        StopCoroutines();
-        
-    }
-
     private void OnDestinationChanged(BattlefieldCell value)
     {
         StopCoroutines();
@@ -97,9 +83,20 @@ public sealed class CellPanelPresenter : MonoBehaviour
 
     private void StopCoroutines()
     {
-        if (_destinationChangingCoroutine != null)
-            StopCoroutine(_destinationChangingCoroutine);
+        if (_destinationChangingCoroutine == null)
+            return;
+
+        UnsubscribeFromPresenter(_accept);
+        UnsubscribeFromPresenter(_cancel);
+        UnsubscribeFromPresenter(_clockwiseRotation);
+        UnsubscribeFromPresenter(_counterclockwiseRotation);
+        StopCoroutine(_destinationChangingCoroutine);
         _visibilityChangingEntriesCount = 0;
+    }
+
+    private void UnsubscribeFromPresenter(BillboardPresenter presenter)
+    {
+        presenter.VisibilityChangingFinished -= OnVisibilityEntryFinished;
     }
 
     private IEnumerator DestinationChanging(BattlefieldCell cell)
@@ -145,6 +142,7 @@ public sealed class CellPanelPresenter : MonoBehaviour
 
     private void LaunchRevealingEntry(BillboardPresenter presenter)
     {
+        Debug.Log(presenter.gameObject);
         _visibilityChangingEntriesCount++;
         presenter.VisibilityChangingFinished += OnVisibilityEntryFinished;
         presenter.Reveal();
@@ -153,6 +151,7 @@ public sealed class CellPanelPresenter : MonoBehaviour
 
     private void LaunchHidingEntry(BillboardPresenter presenter)
     {
+        Debug.Log("hide" + presenter.gameObject);
         _visibilityChangingEntriesCount++;
         presenter.VisibilityChangingFinished += OnVisibilityEntryFinished;
         presenter.Hide();

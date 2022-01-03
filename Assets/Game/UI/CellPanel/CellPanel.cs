@@ -32,13 +32,12 @@ public sealed class CellPanel : WorldPointerHandler, ICellPanel
 
     public void SetDestination(BattlefieldCell value)
     {
-        if (Destination == value)
+        if (Destination == value && Visible)
             return;
 
+        Visible = true;
         Destination = value;
         DestinationChanged?.Invoke(Destination);
-
-        Visible = true;
     }
 
     internal void SetConfig(CellPanelConfig value)
