@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using GameStates;
 using AvaliableActions;
+using Zenject;
 
 namespace GameStates
 {
@@ -11,25 +12,27 @@ namespace Phase1Space
         public sealed class RotateTokenSubphase : TrueGameState<RotateTokenActionsList>
         {
             private CellPanel _cellPanel;
-           // private ISelector _selector;
-
+            private CellPanelConfig _panelConfig;
 
             public RotateTokenSubphase(
                 IAvaliableActionsClient actionsClient,
                 CellPanel cellPanel,
-                ISelector selector) 
+                [Inject(Id = CellPanelConfigType.Rotate)] CellPanelConfig panelConfig) 
                 : base(actionsClient)
             {
                 _cellPanel = cellPanel;
-              //  _selector = selector;
+                _panelConfig = panelConfig;
             }
 
             public override void ExecuteCommand(IGameCommand command)
             {
-
             }
 
-            protected override void OnStarted() => DoNothing();
+            protected override void OnStarted()
+            {
+                Debug.Log("new config");
+                _cellPanel.SetConfig(_panelConfig);
+            }
 
             protected override void OnStoped() => DoNothing();
 

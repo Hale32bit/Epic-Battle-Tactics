@@ -255,6 +255,8 @@ MonoBehaviour:
   _cellPanel: {fileID: 910277456}
   _tokensSpawner: {fileID: 155677245}
   _cameraRotationCenter: {fileID: 975452483}
+  _placeCellPanelConfig: {fileID: 11400000, guid: 8434cb62d571d1043ab350e4bb3d26f0, type: 2}
+  _rotateCellPanelConfig: {fileID: 11400000, guid: 5666a6c8395142c499303a3e1d498c07, type: 2}
 --- !u!114 &134375523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -358,6 +360,7 @@ GameObject:
   - component: {fileID: 326859797}
   - component: {fileID: 326859798}
   - component: {fileID: 326859801}
+  - component: {fileID: 326859802}
   m_Layer: 0
   m_Name: cancelButton
   m_TagString: Untagged
@@ -405,7 +408,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentTexture: {fileID: 2800000, guid: 0c90907c96b6e6e43a3312f9688f2bde, type: 3}
-  _currentAlpha: 1
+  _currentAlpha: 0
 --- !u!23 &326859799
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -467,6 +470,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46ad9814b30dba74bbff101cdbdf1386, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &326859802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326859795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 052fda5e3cb15f9448bc907aadfbeb58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _alphaChangingSpeed: 5
 --- !u!1001 &373510503
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -834,6 +850,7 @@ GameObject:
   - component: {fileID: 605528232}
   - component: {fileID: 605528235}
   - component: {fileID: 605528236}
+  - component: {fileID: 605528237}
   m_Layer: 0
   m_Name: LeftButton
   m_TagString: Untagged
@@ -930,7 +947,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentTexture: {fileID: 2800000, guid: a59dc48a2b03a904bb1ec6cd9590dfc9, type: 3}
-  _currentAlpha: 1
+  _currentAlpha: 0
 --- !u!114 &605528236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -943,6 +960,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 421853f737b78434e904f24e1629d7c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &605528237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 605528230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 052fda5e3cb15f9448bc907aadfbeb58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _alphaChangingSpeed: 5
 --- !u!1 &910277454
 GameObject:
   m_ObjectHideFlags: 0
@@ -1005,12 +1035,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72e06f6c880615a4f828d6eba9b673a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _alphaChangingSpeed: 5
-  _billboardsViews:
-  - {fileID: 1908873475}
-  - {fileID: 326859798}
-  - {fileID: 1556447811}
-  - {fileID: 605528235}
+  _accept: {fileID: 1908873477}
+  _cancel: {fileID: 326859802}
+  _clockwiseRotation: {fileID: 1556447813}
+  _counterclockwiseRotation: {fileID: 605528237}
 --- !u!1 &938481158
 GameObject:
   m_ObjectHideFlags: 0
@@ -6402,6 +6430,7 @@ GameObject:
   - component: {fileID: 1556447808}
   - component: {fileID: 1556447811}
   - component: {fileID: 1556447812}
+  - component: {fileID: 1556447813}
   m_Layer: 0
   m_Name: RightButton
   m_TagString: Untagged
@@ -6498,7 +6527,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentTexture: {fileID: 2800000, guid: a59dc48a2b03a904bb1ec6cd9590dfc9, type: 3}
-  _currentAlpha: 1
+  _currentAlpha: 0
 --- !u!114 &1556447812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6511,6 +6540,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a283699ba9b332f46bad217f2949db78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1556447813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1556447806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 052fda5e3cb15f9448bc907aadfbeb58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _alphaChangingSpeed: 5
 --- !u!1 &1559340890
 GameObject:
   m_ObjectHideFlags: 0
@@ -6904,6 +6946,7 @@ GameObject:
   - component: {fileID: 1908873470}
   - component: {fileID: 1908873475}
   - component: {fileID: 1908873476}
+  - component: {fileID: 1908873477}
   m_Layer: 0
   m_Name: ApplyButton
   m_TagString: Untagged
@@ -7015,7 +7058,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentTexture: {fileID: 2800000, guid: e12f21a1974035a4580e1a3a1fd8ba20, type: 3}
-  _currentAlpha: 1
+  _currentAlpha: 0
 --- !u!114 &1908873476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7028,6 +7071,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f957ad4c57cb4e44b454bc708a3cae1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1908873477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908873469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 052fda5e3cb15f9448bc907aadfbeb58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _alphaChangingSpeed: 5
 --- !u!1001 &5441714740751321192
 PrefabInstance:
   m_ObjectHideFlags: 0

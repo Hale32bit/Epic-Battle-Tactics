@@ -29,8 +29,6 @@ public sealed class Game : CommandExecutor, IStateParent
     protected override void OnCommand(IGameCommand command)
     {
         _phases.ExecuteCommand(command);
-
-        Debug.Log(command.Category.ToString());
     }
 
     void IStateParent.SwitchToState<TState>()

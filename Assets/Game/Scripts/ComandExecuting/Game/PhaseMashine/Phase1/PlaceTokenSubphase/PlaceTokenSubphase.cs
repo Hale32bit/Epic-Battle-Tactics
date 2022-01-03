@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using AvaliableActions;
+using Zenject;
 
 namespace GameStates
 {
@@ -10,15 +11,18 @@ namespace GameStates
         public sealed class PlaceTokenSubphase : TrueGameState<PlaceTokenActionsList>
         {
             private CellPanel _cellPanel;
+            private CellPanelConfig _panelConfig;
             private ITokenPlacer _placer;
 
             public PlaceTokenSubphase(
                 IAvaliableActionsClient actionsClient,
                 CellPanel cellPanel,
-                ITokenPlacer placer) 
+                ITokenPlacer placer,
+                [Inject(Id = CellPanelConfigType.Place)] CellPanelConfig panelConfig) 
                 : base(actionsClient)
             {
                 _cellPanel = cellPanel;
+                _panelConfig = panelConfig;
                 _placer = placer; 
             }
 
@@ -36,12 +40,13 @@ namespace GameStates
                 Parent.SwitchToState<RotateTokenSubphase>();
             }
 
-            protected override void OnStarted() => DoNothing();
-
-            protected override void OnStoped()
+            protected override void OnStarted()
             {
-                _cellPanel.SetUnvisible();
+                _cellPanel.SetConfig(_panelConfig);
             }
+
+            protected override void OnStoped() => DoNothing();
+        
         }
     }
 }

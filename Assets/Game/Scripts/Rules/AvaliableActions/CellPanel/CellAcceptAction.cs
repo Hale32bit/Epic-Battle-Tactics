@@ -14,7 +14,6 @@ namespace AvaliableActions
 
         protected override bool PredicateForData(IDataForCommand data)
         {
-            Debug.Log(data.OriginalSource.GetType());
             return data.OriginalSource is CellAcceptButton &&
                 data.EventType == PointerEventType.Click;
         }

@@ -4,20 +4,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [DisallowMultipleComponent]
-public sealed class CellPanel : WorldPointerHandler
+public sealed class CellPanel : WorldPointerHandler, ICellPanel
 {
-    public event Action<bool> VisibleChanged;
+    public event Action BecomeUnvisible;
     public event Action<BattlefieldCell> DestinationChanged;
+    public event Action<CellPanelConfig> ConfigChanged;
 
-    public bool Visible { get; private set; } = true;
+    public CellPanelConfig Config { get; private set; }
+
+    public bool Visible { get; private set; } = false;
     public BattlefieldCell Destination { get; private set; }
 
     [SerializeField] private WorldPointerHandler[] _buttons;
 
-    private void Start()
-    {
-        SetUnvisible();
-    }
 
     private void OnEnable()
     {
@@ -39,16 +38,13 @@ public sealed class CellPanel : WorldPointerHandler
         Destination = value;
         DestinationChanged?.Invoke(Destination);
 
-        SetVisible();
+        Visible = true;
     }
 
-    private void SetVisible()
+    internal void SetConfig(CellPanelConfig value)
     {
-        if (Visible)
-            return;
-
-        Visible = true;
-        VisibleChanged?.Invoke(Visible);
+        Config = value;
+        ConfigChanged?.Invoke(Config);
     }
 
     public void SetUnvisible()
@@ -57,7 +53,6 @@ public sealed class CellPanel : WorldPointerHandler
             return;
 
         Visible = false;
-        VisibleChanged?.Invoke(Visible);
+        BecomeUnvisible?.Invoke();
     }
-
 }

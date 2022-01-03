@@ -5,33 +5,74 @@ using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using UnityEngine;
 
 [DisallowMultipleComponent]
-[RequireComponent(typeof(CellPanel))]
+[RequireComponent(typeof(ICellPanel))]
 public sealed class CellPanelPresenter : MonoBehaviour
 {
-    [SerializeField] private float _alphaChangingSpeed = 3f;
-    [SerializeField] private BilboardView[] _billboardsViews;    
+    [SerializeField] private BillboardPresenter _accept;
+    [SerializeField] private BillboardPresenter _cancel;
+    [SerializeField] private BillboardPresenter _clockwiseRotation;
+    [SerializeField] private BillboardPresenter _counterclockwiseRotation;
 
-    private float _currentAlpha = 1f;
     private Coroutine _destinationChangingCoroutine;
-    private Coroutine _visibilityCoroutine;
+    private int _visibilityChangingEntriesCount = 0;
 
-    private CellPanel _panel;
+    private ICellPanel _panel;
 
     private void Awake()
     {
-        _panel = GetComponent<CellPanel>();
+        _panel = GetComponent<ICellPanel>();
     }
 
     private void OnEnable()
     {
         _panel.DestinationChanged += OnDestinationChanged;
-        _panel.VisibleChanged += OnVisibleChanged;
+        _panel.BecomeUnvisible += OnBecomeInvisible;
+        _panel.ConfigChanged += OnConfigChanged;
     }
 
     private void OnDisable()
     {
         _panel.DestinationChanged -= OnDestinationChanged;
-        _panel.VisibleChanged -= OnVisibleChanged;
+        _panel.BecomeUnvisible -= OnBecomeInvisible;
+        _panel.ConfigChanged -= OnConfigChanged;
+    }
+
+    private void OnBecomeInvisible()
+    {
+        _accept.Hide();
+        _cancel.Hide();
+        _clockwiseRotation.Hide();
+        _counterclockwiseRotation.Hide();
+    }
+
+    private void OnConfigChanged(CellPanelConfig value)
+    {
+        if (_panel.Visible)
+            UpdateVisibilytyByConfig(value);
+    }
+
+    private void UpdateVisibilytyByConfig(CellPanelConfig value)
+    {
+        if (value.AcceptButtonEnabled)
+            _accept.Reveal();
+        else
+            _accept.Hide();
+
+        if (value.CancelButtonEnabled)
+            _cancel.Reveal();
+        else
+            _cancel.Hide();
+
+        if (value.RotateButtonEnabled)
+        {
+            _clockwiseRotation.Reveal();
+            _counterclockwiseRotation.Reveal();
+        }
+        else
+        {
+            _clockwiseRotation.Reveal();
+            _counterclockwiseRotation.Reveal();
+        }
     }
 
     private void OnVisibleChanged(bool value)
@@ -45,7 +86,7 @@ public sealed class CellPanelPresenter : MonoBehaviour
     private void LaunchVisibleChanging()
     {
         StopCoroutines();
-        _visibilityCoroutine = StartCoroutine(VisibilityChanging(_panel.Visible ? 1f : 0f));
+        
     }
 
     private void OnDestinationChanged(BattlefieldCell value)
@@ -58,55 +99,68 @@ public sealed class CellPanelPresenter : MonoBehaviour
     {
         if (_destinationChangingCoroutine != null)
             StopCoroutine(_destinationChangingCoroutine);
-        if (_visibilityCoroutine != null)
-            StopCoroutine(_visibilityCoroutine);
+        _visibilityChangingEntriesCount = 0;
     }
 
     private IEnumerator DestinationChanging(BattlefieldCell cell)
     {
-        _visibilityCoroutine = StartCoroutine(VisibilityChanging(0f));
-        yield return _visibilityCoroutine;
+        LaunchHiding();
+        while (_visibilityChangingEntriesCount != 0)
+            yield return null;
 
         this.transform.position = cell.transform.position;
 
-        _visibilityCoroutine = StartCoroutine(VisibilityChanging(1f));
-        yield return _visibilityCoroutine;
+        LaunchRevealing();
+        while (_visibilityChangingEntriesCount != 0)
+            yield return null;
 
         _destinationChangingCoroutine = null;
     }
 
-    private IEnumerator VisibilityChanging(float destination)
+    private void LaunchHiding()
     {
-        DisableColliders();
-        
-        while (_currentAlpha != destination)
+        if (_panel.Config.AcceptButtonEnabled)
+            LaunchHidingEntry(_accept);
+        if (_panel.Config.CancelButtonEnabled)
+            LaunchHidingEntry(_cancel);
+        if (_panel.Config.RotateButtonEnabled)
         {
-            UpdateAlpha(destination);
-            yield return null;
+            LaunchHidingEntry(_clockwiseRotation);
+            LaunchHidingEntry(_counterclockwiseRotation);
         }
-
-        if (_panel.Visible)
-            EnableColliders();
-
-        _visibilityCoroutine = null;
     }
 
-    private void DisableColliders()
+    private void LaunchRevealing()
     {
-        foreach (var view in _billboardsViews)
-            view.ColliderOFF();
+        if (_panel.Config.AcceptButtonEnabled)
+            LaunchRevealingEntry(_accept);
+        if (_panel.Config.CancelButtonEnabled)
+            LaunchRevealingEntry(_cancel);
+        if (_panel.Config.RotateButtonEnabled)
+        {
+            LaunchRevealingEntry(_clockwiseRotation);
+            LaunchRevealingEntry(_counterclockwiseRotation);
+        }
     }
 
-    private void EnableColliders()
+    private void LaunchRevealingEntry(BillboardPresenter presenter)
     {
-        foreach (var view in _billboardsViews)
-            view.ColliderON();
+        _visibilityChangingEntriesCount++;
+        presenter.VisibilityChangingFinished += OnVisibilityEntryFinished;
+        presenter.Reveal();
+
     }
 
-    private void UpdateAlpha(float destination)
+    private void LaunchHidingEntry(BillboardPresenter presenter)
     {
-        _currentAlpha = Mathf.MoveTowards(_currentAlpha, destination, _alphaChangingSpeed * Time.deltaTime);
-        foreach (var view in _billboardsViews)
-            view.SetAlpha(_currentAlpha);
+        _visibilityChangingEntriesCount++;
+        presenter.VisibilityChangingFinished += OnVisibilityEntryFinished;
+        presenter.Hide();
+    }
+
+    private void OnVisibilityEntryFinished(BillboardPresenter presenter)
+    {
+        presenter.VisibilityChangingFinished -= OnVisibilityEntryFinished;
+        _visibilityChangingEntriesCount--;
     }
 }

@@ -19,6 +19,8 @@ public class GameSceneInstaller : MonoInstaller
     [SerializeField] private GameObject _tokensSpawner;
     [SerializeField] private GameObject _cameraRotationCenter;
 
+    [SerializeField] private CellPanelConfig _placeCellPanelConfig;
+    [SerializeField] private CellPanelConfig _rotateCellPanelConfig;
 
     public override void InstallBindings()
     {
@@ -41,6 +43,17 @@ public class GameSceneInstaller : MonoInstaller
         GamePhasesInstaller.Install(Container);
 
         BindTokenMovers();
+
+        Container.Bind<CellPanelConfig>()
+            .WithId(CellPanelConfigType.Place)
+            .FromInstance(_placeCellPanelConfig)
+            .AsCached();
+
+        Container.Bind<CellPanelConfig>()
+            .WithId(CellPanelConfigType.Rotate)
+            .FromInstance(_rotateCellPanelConfig)
+            .AsCached();
+
 
         Container.Bind<CameraRotationModel>()
             .FromComponentOn(_cameraRotationCenter)
