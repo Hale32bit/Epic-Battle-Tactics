@@ -4,10 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class HotSeatPlayer : Player
+public sealed class HotSeatPlayer : Player
 {
-    [Inject]
-    private void Construct(Battlefield battlefield, UIEventRoot uiRoot)
+    public HotSeatPlayer(
+        IGameCommandClient client,
+        Battlefield battlefield, 
+        UIEventRoot uiRoot,
+        PlayerConfig config)
+        : base(client, config)
     {
         uiRoot.Clicked += OnPointerEvent;
         uiRoot.PointerEnter += OnPointerEvent;
@@ -18,8 +22,11 @@ public class HotSeatPlayer : Player
         battlefield.PointerExit += OnPointerEvent;
     }
 
-    protected void OnPointerEvent(WorldPointerEventData data)
+    private void OnPointerEvent(WorldPointerEventData data)
     {
+        if (Active == false)
+            return;
+
         if (AvaliableActions.TryParseToAction(data, out IGameCommand command))
             Client.Receive(command);
     }

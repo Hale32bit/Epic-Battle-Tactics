@@ -142,16 +142,13 @@ public sealed class CellPanelPresenter : MonoBehaviour
 
     private void LaunchRevealingEntry(BillboardPresenter presenter)
     {
-        Debug.Log(presenter.gameObject);
         _visibilityChangingEntriesCount++;
         presenter.VisibilityChangingFinished += OnVisibilityEntryFinished;
         presenter.Reveal();
-
     }
 
     private void LaunchHidingEntry(BillboardPresenter presenter)
     {
-        Debug.Log("hide" + presenter.gameObject);
         _visibilityChangingEntriesCount++;
         presenter.VisibilityChangingFinished += OnVisibilityEntryFinished;
         presenter.Hide();

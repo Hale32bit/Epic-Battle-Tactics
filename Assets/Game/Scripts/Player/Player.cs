@@ -6,21 +6,27 @@ using UnityEngine;
 using Zenject;
 
 [DisallowMultipleComponent]
-public abstract class Player : IAvaliableActionsClient
+public abstract class Player :  IPlayer
 {  
+    public PlayerConfig Config { get; private set; }
+    public bool Active { get; private set; }
     protected AvaliableActionsList AvaliableActions;
-
     protected IGameCommandClient Client;
 
-    [Inject]
-    private void Construct(IGameCommandClient gameCommandClient)
+    protected Player(IGameCommandClient client, PlayerConfig config)
     {
-        Client = gameCommandClient;
+        Client = client;
+        Config = config;
     }
 
     public void Receive(AvaliableActionsList actions)
     {
         AvaliableActions = actions;
+    }
+
+    public void SetActive(bool value)
+    {
+        Active = value;
     }
 }
 

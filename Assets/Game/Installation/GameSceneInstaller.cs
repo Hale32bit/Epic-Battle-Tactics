@@ -22,6 +22,9 @@ public class GameSceneInstaller : MonoInstaller
     [SerializeField] private CellPanelConfig _placeCellPanelConfig;
     [SerializeField] private CellPanelConfig _rotateCellPanelConfig;
 
+    [SerializeField] private PlayerInstallerBox _firstPlayerInstaller;
+    [SerializeField] private PlayerInstallerBox _SecondPlayerInstaller;
+
     public override void InstallBindings()
     {
         BindCamera();
@@ -30,7 +33,7 @@ public class GameSceneInstaller : MonoInstaller
 
         BindBattlefield();
 
-        BindPlayer();
+        BindPlayers();
 
         BindActionsGate();
 
@@ -135,10 +138,29 @@ public class GameSceneInstaller : MonoInstaller
             .AsSingle();
     }
 
-    private void BindPlayer()
+    private void BindPlayers()
     {
-        Container.Bind<IAvaliableActionsClient>()
+        var subcontainer1 = Container.CreateSubContainer();
+        var subcontainer2 = Container.CreateSubContainer();
+
+        _firstPlayerInstaller.Install(subcontainer1);
+        _SecondPlayerInstaller.Install(subcontainer2);
+
+        Container.Bind<IPlayer>()
+            .WithId("first")
             .To<HotSeatPlayer>()
+            .FromSubContainerResolve()
+            .ByInstance(subcontainer1)
+            .AsCached();
+
+        Container.Bind<IPlayer>()
+            .WithId("second")
+            .To<HotSeatPlayer>()
+            .FromSubContainerResolve()
+            .ByInstance(subcontainer2)
+            .AsCached();
+
+        Container.BindInterfacesAndSelfTo<PlayerTurn>()
             .FromNew()
             .AsSingle();
     }

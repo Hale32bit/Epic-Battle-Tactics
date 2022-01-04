@@ -41,7 +41,6 @@ public class TokenRotator : MonoBehaviour
     private void StopRotation()
     {
         _currentAngle = 0;
-        //_basicPoint = this.transform.position;
         if (_activeCoroutine != null)
         {
             StopCoroutine(_activeCoroutine);

@@ -34,6 +34,8 @@ public class TokenMoverScript
         firstContainer = new Mock<ITokenContainer>();
         secondContainer = new Mock<ITokenContainer>();
         firstContainer.Setup(x => x.Release()).Returns(token.Object);
+        firstContainer.Setup(x => x.GetToken()).Returns(token.Object);
+
     }
 
     private class TokenMoverMOCK : TokenMover

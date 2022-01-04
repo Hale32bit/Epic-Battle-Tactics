@@ -257,6 +257,8 @@ MonoBehaviour:
   _cameraRotationCenter: {fileID: 975452483}
   _placeCellPanelConfig: {fileID: 11400000, guid: 8434cb62d571d1043ab350e4bb3d26f0, type: 2}
   _rotateCellPanelConfig: {fileID: 11400000, guid: 5666a6c8395142c499303a3e1d498c07, type: 2}
+  _firstPlayerInstaller: {fileID: 962318191}
+  _SecondPlayerInstaller: {fileID: 2019479853}
 --- !u!114 &134375523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -301,6 +303,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 962318192}
+  - {fileID: 2019479854}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1123,13 +1126,28 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 962318192}
+  - component: {fileID: 962318191}
   m_Layer: 0
-  m_Name: TokenRotator
+  m_Name: Player1InstallerBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &962318191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 962318190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e564c2662b13fe64f88eae8b3073c8b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _name: Vitya
+  _color: {r: 0.8396226, g: 0.31628332, b: 0.20990565, a: 0}
 --- !u!4 &962318192
 Transform:
   m_ObjectHideFlags: 0
@@ -1189,7 +1207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b730add3e3fa1764f83da9a91ccbf805, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotationSpeed: 150
+  _rotationSpeed: 350
 --- !u!114 &975452486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7115,6 +7133,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _alphaChangingSpeed: 5
+--- !u!1 &2019479852
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2019479854}
+  - component: {fileID: 2019479853}
+  m_Layer: 0
+  m_Name: Player2InstallerBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2019479853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2019479852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e564c2662b13fe64f88eae8b3073c8b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _name: Masha
+  _color: {r: 0.2494215, g: 0.39091593, b: 0.8962264, a: 0}
+--- !u!4 &2019479854
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2019479852}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 134375524}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &5441714740751321192
 PrefabInstance:
   m_ObjectHideFlags: 0
