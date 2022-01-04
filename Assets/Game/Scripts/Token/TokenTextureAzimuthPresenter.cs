@@ -7,59 +7,44 @@ using Zenject;
 [DisallowMultipleComponent]
 public sealed class TokenTextureAzimuthPresenter : MonoBehaviour
 {
-    private enum PresentationState
-    {
-        Simple,
-        Camera
-    }
-
     public const float DefaultAzimuth = 0f;
 
-    public event Action TargetAzimuthChanged;
+    private AzimuthTokenPresentationState _state = AzimuthTokenPresentationState.Simple;
 
     public float TargetAthimuth { get
         {
-            if (_state == PresentationState.Camera)
+            if (_state == AzimuthTokenPresentationState.Camera)
                 return  _cameraModel.TargetCameraAzimuth - transform.rotation.eulerAngles.y;
-            else if (_state == PresentationState.Simple)
+            else if (_state == AzimuthTokenPresentationState.Simple)
                 return DefaultAzimuth;
             else
                 throw new Exception("TargetAthimuth cant be defined");
         } }
-
+    
     
     private CameraRotationModel _cameraModel;
 
-    private PresentationState _state = PresentationState.Simple;
+    [SerializeField] private Token _token;
 
     [Inject]
     private void Construct(CameraRotationModel cameraModel)
     {
         _cameraModel = cameraModel;
-        SetSimpleState();
-        _cameraModel.ForeshorteningChanged += OnForeshoterningChanged;
+        _state =  AzimuthTokenPresentationState.Simple;
     }
 
-    private void OnDestroy()
+    private void OnEnable()
     {
-        _cameraModel.ForeshorteningChanged -= OnForeshoterningChanged;
+        _token.AzimuthCameraStateChanged += OnAzimuthStateChanged;
     }
 
-    private void OnForeshoterningChanged()
+    private void OnDisable()
     {
-        if (_state == PresentationState.Camera)
-            TargetAzimuthChanged?.Invoke();
+        _token.AzimuthCameraStateChanged -= OnAzimuthStateChanged;
     }
 
-    public void SetCameraState()
+    private void OnAzimuthStateChanged(AzimuthTokenPresentationState value)
     {
-        _state = PresentationState.Camera;
-        TargetAzimuthChanged?.Invoke();
-    }
-
-    public void SetSimpleState()
-    {
-        _state = PresentationState.Simple;
-        TargetAzimuthChanged?.Invoke();
+        _state = value;
     }
 }

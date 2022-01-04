@@ -26,6 +26,16 @@ namespace Phase1Space
 
             public override void ExecuteCommand(IGameCommand command)
             {
+                if (command.Category == CommandCategory.ClockwiseRotate)
+                {
+                    var token = _cellPanel.Destination.GetToken();
+                    token.SetRotationStep(token.RotationStep + 1);
+                }
+                if (command.Category == CommandCategory.CounterClockwiseRotate)
+                {
+                    var token = _cellPanel.Destination.GetToken();
+                    token.SetRotationStep(token.RotationStep - 1);
+                }
             }
 
             protected override void OnStarted()

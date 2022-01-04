@@ -17,27 +17,14 @@ public class QuadView : MonoBehaviour
     private TokenTextureAzimuthPresenter _presenter;
 
     private float _currentAthimuth = 0;
-    private const float Speed = 200f;
+    [SerializeField] private  float Speed = 400f;
 
     private void Start()
     { 
         _renderer = GetComponent<MeshRenderer>();
         _presenter = GetComponent<TokenTextureAzimuthPresenter>();
-
-        _presenter.TargetAzimuthChanged += OnAzimuthStepChanged;
         UpdateTextureAzimuth();
         SetTokenData(_tokenData);
-        this.enabled = false;
-    }
-
-    private void OnDestroy()
-    {
-        _presenter.TargetAzimuthChanged -= OnAzimuthStepChanged;
-    }
-
-    private void OnAzimuthStepChanged()
-    {
-        this.enabled = true;
     }
 
     private void SetTokenData(TokenData data)
@@ -53,9 +40,6 @@ public class QuadView : MonoBehaviour
         _currentAthimuth = Mathf.MoveTowardsAngle(_currentAthimuth, _presenter.TargetAthimuth, Speed * Time.deltaTime);
 
         UpdateTextureAzimuth();
-
-        if (_currentAthimuth == _presenter.TargetAthimuth)
-            this.enabled = false;
     }
 
     private void UpdateTextureAzimuth()

@@ -5,44 +5,92 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [DisallowMultipleComponent]
+[RequireComponent(typeof(ITokenRotatable))]
 public class TokenRotator : MonoBehaviour
 {
     public event Action Finished;
 
-    [SerializeField] private float _duration = 0.3f;
+    [SerializeField] private float _jumpDuration = 0.8f;
     [SerializeField] private float _jumpHeight = 1f;
     [SerializeField] private AnimationCurve _normalizedHeightVsNormalizedTime;
 
     private Coroutine _activeCoroutine;
-    private float _lastCoroutineStartTime;
-    private Token _workingToken;
+    private float _coroutineJumpElapsedTime;
+    private float _currentAngle;
+    private Vector3 _basicPoint;
 
-    public void SetToken(Token value)
+    private ITokenRotatable _token;
+
+    private void Awake()
     {
-        if (_activeCoroutine != null)
-            throw new System.Exception("you try set token in active phase");
-
-        _workingToken = value;
+        _token = GetComponent<ITokenRotatable>();
     }
 
-    public void RotateClockwise()
+    private void OnEnable()
     {
-       if (_activeCoroutine != null)
-        {
+        _token.RotationStepChanged += OnRotationStepChanged;
+    }
 
+    private void OnDisable()
+    {
+        _token.RotationStepChanged -= OnRotationStepChanged;
+    }
+
+    private void OnRotationStepChanged()
+    {
+        float destinationAngel = _token.RotationStep * (float)(360 / Token.RotationStepsCount);
+
+        if (_activeCoroutine != null)
+            RelaunchCurrentRotation(destinationAngel);
+        else
+            LaunchNewRotation(destinationAngel);
+        
+    }
+
+    private void RelaunchCurrentRotation(float destinationAngel)
+    {
+        StopCoroutine(_activeCoroutine);
+
+        ReturnTofirstHalfOfJump();
+
+        _activeCoroutine = StartCoroutine(Rotation(destinationAngel));
+    }
+
+    private void ReturnTofirstHalfOfJump()
+    {
+        if (_coroutineJumpElapsedTime > _jumpDuration / 2f)
+        {
+            float delta = _coroutineJumpElapsedTime - _jumpDuration / 2f;
+            _coroutineJumpElapsedTime = _jumpDuration / 2f  - delta;
         }
     }
 
-    public void RotateCounterClockwise()
+    private void LaunchNewRotation(float destinationAngel)
     {
-
+        _basicPoint = this.transform.position;
+        _coroutineJumpElapsedTime = 0;
+        _activeCoroutine = StartCoroutine(Rotation(destinationAngel));
     }
 
-    private IEnumerator Rotation()
+    private IEnumerator Rotation(float destination)
     {
-        yield return null;
+        _token.SetRotationInProcess(true);
+        float startAngle = _currentAngle;
+        float rotationElapsetTime = 0;
+        float rotationDuration = _jumpDuration - _coroutineJumpElapsedTime;
 
-        Finished?.Invoke();
+        while (_coroutineJumpElapsedTime < _jumpDuration)
+        {
+            _coroutineJumpElapsedTime += Time.deltaTime;
+            rotationElapsetTime += Time.deltaTime;
+            _currentAngle = Mathf.LerpAngle(startAngle, destination, rotationElapsetTime / rotationDuration);
+            float currentHeight = _normalizedHeightVsNormalizedTime.Evaluate(_coroutineJumpElapsedTime / _jumpDuration) * _jumpHeight;
+            this.transform.position = _basicPoint + Vector3.up * currentHeight;
+            this.transform.rotation = Quaternion.Euler(0f, _currentAngle, 0f);
+            yield return null;
+        }
+
+        _token.SetRotationInProcess(false);
         _activeCoroutine = null;
     }
 

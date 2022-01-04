@@ -35,8 +35,9 @@ namespace GameStates
             }
 
             private void PlaceToken()
-            {
+            { 
                 _placer.Place(_cellPanel.Destination);
+                _cellPanel.Destination.GetToken().SetCameraAzimuthState();
                 Parent.SwitchToState<RotateTokenSubphase>();
             }
 

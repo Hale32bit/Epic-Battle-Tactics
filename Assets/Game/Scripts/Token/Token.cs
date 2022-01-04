@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,21 +6,37 @@ using Zenject;
 
 [RequireComponent(typeof(BoxCollider))]
 [DisallowMultipleComponent]
-public class Token : WorldPointerHandler
+public class Token : WorldPointerHandler, ITokenRotatable
 {
+    public const int RotationStepsCount = 4;
 
+    public event Action RotationStepChanged;
+    public event Action<AzimuthTokenPresentationState> AzimuthCameraStateChanged;
 
+    [SerializeField] private TokenTextureAzimuthPresenter _azimuthPresenter;
+    
+    public int RotationStep { get; private set; }
+    public bool RotationInProcess { get; private set; } = false;
 
-    void Start()
+    public void SetCameraAzimuthState()
     {
-        var box = GetComponent<BoxCollider>();
-        box.center = Vector3.up * ProceduralGeneratedMeshes.TokenEdgeGenerator.PhisicalHeight / 2f;
-        box.size = new Vector3(
-            ProceduralGeneratedMeshes.TokenEdgeGenerator.PhysicalWidth,
-            ProceduralGeneratedMeshes.TokenEdgeGenerator.PhisicalHeight,
-            ProceduralGeneratedMeshes.TokenEdgeGenerator.PhysicalWidth 
-            );
-        
+        AzimuthCameraStateChanged?.Invoke(AzimuthTokenPresentationState.Camera);
+    }
+
+    public void SetSimpleAzimuthState()
+    {
+        AzimuthCameraStateChanged?.Invoke(AzimuthTokenPresentationState.Simple);
+    }
+
+    public void SetRotationStep(int value)
+    {
+        RotationStep = value % RotationStepsCount;
+        RotationStepChanged?.Invoke();
+    }
+
+    void ITokenRotatable.SetRotationInProcess(bool value)
+    {
+        RotationInProcess = value;
     }
 
     public class Factory : PlaceholderFactory<Token> { }
