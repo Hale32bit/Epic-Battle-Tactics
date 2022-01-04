@@ -13,15 +13,18 @@ namespace Phase1Space
         {
             private CellPanel _cellPanel;
             private CellPanelConfig _panelConfig;
+            private IReturnerToPrecamera _returner;
 
             public RotateTokenSubphase(
                 IAvaliableActionsClient actionsClient,
                 CellPanel cellPanel,
-                [Inject(Id = CellPanelConfigType.Rotate)] CellPanelConfig panelConfig) 
+                [Inject(Id = CellPanelConfigType.Rotate)] CellPanelConfig panelConfig,
+                IReturnerToPrecamera returner) 
                 : base(actionsClient)
             {
                 _cellPanel = cellPanel;
                 _panelConfig = panelConfig;
+                _returner = returner;
             }
 
             public override void ExecuteCommand(IGameCommand command)
@@ -36,6 +39,12 @@ namespace Phase1Space
                     var token = _cellPanel.Destination.GetToken();
                     token.SetRotationStep(token.RotationStep - 1);
                 }
+                if (command.Category == CommandCategory.Cancel)
+                {
+                    _cellPanel.Destination.GetToken().SetRotationStep(0);
+                    _returner.Return();
+                    Parent.SwitchToState<PlaceTokenSubphase>();
+                }
             }
 
             protected override void OnStarted()
@@ -44,7 +53,11 @@ namespace Phase1Space
                 _cellPanel.SetConfig(_panelConfig);
             }
 
-            protected override void OnStoped() => DoNothing();
+            protected override void OnStoped()
+            {
+                _cellPanel.SetUnvisible();
+            }
+
 
         }
     }

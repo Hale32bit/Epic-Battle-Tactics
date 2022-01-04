@@ -1,6 +1,6 @@
 ﻿using System;
 
-internal interface ICellPanel
+public interface ICellPanel
 {
     CellPanelConfig Config { get; }
     bool Visible { get; }

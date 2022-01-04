@@ -17,6 +17,8 @@ public abstract class TokenMover
    
     public void MoveToken(ITokenContainer initial, ITokenContainer target)
     {
+        initial.GetToken().SetMovementStarted();
+
         Tween tween = GenerateTweenForMoving((dynamic)initial, (dynamic)target);
 
         if (tween != null)

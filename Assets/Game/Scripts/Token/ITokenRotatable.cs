@@ -5,6 +5,5 @@ internal interface ITokenRotatable
     int RotationStep { get; }
 
     event Action RotationStepChanged;
-
-    void SetRotationInProcess(bool value);
+    event Action MovementStarted;
 }

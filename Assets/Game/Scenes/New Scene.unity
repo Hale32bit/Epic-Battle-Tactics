@@ -257,7 +257,6 @@ MonoBehaviour:
   _cameraRotationCenter: {fileID: 975452483}
   _placeCellPanelConfig: {fileID: 11400000, guid: 8434cb62d571d1043ab350e4bb3d26f0, type: 2}
   _rotateCellPanelConfig: {fileID: 11400000, guid: 5666a6c8395142c499303a3e1d498c07, type: 2}
-  _tokenRotator: {fileID: 0}
 --- !u!114 &134375523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -378,7 +377,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 326859795}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.492, y: -0.25, z: -0.1}
+  m_LocalPosition: {x: 0.492, y: -0.25, z: -0.4}
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children: []
   m_Father: {fileID: 1908873473}

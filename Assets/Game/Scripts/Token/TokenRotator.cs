@@ -29,11 +29,24 @@ public class TokenRotator : MonoBehaviour
     private void OnEnable()
     {
         _token.RotationStepChanged += OnRotationStepChanged;
+        _token.MovementStarted += StopRotation;
     }
 
     private void OnDisable()
     {
         _token.RotationStepChanged -= OnRotationStepChanged;
+        _token.MovementStarted -= StopRotation;
+    }
+
+    private void StopRotation()
+    {
+        _currentAngle = 0;
+        //_basicPoint = this.transform.position;
+        if (_activeCoroutine != null)
+        {
+            StopCoroutine(_activeCoroutine);
+            _activeCoroutine = null;
+        }
     }
 
     private void OnRotationStepChanged()
@@ -44,7 +57,6 @@ public class TokenRotator : MonoBehaviour
             RelaunchCurrentRotation(destinationAngel);
         else
             LaunchNewRotation(destinationAngel);
-        
     }
 
     private void RelaunchCurrentRotation(float destinationAngel)
@@ -74,7 +86,6 @@ public class TokenRotator : MonoBehaviour
 
     private IEnumerator Rotation(float destination)
     {
-        _token.SetRotationInProcess(true);
         float startAngle = _currentAngle;
         float rotationElapsetTime = 0;
         float rotationDuration = _jumpDuration - _coroutineJumpElapsedTime;
@@ -89,9 +100,6 @@ public class TokenRotator : MonoBehaviour
             this.transform.rotation = Quaternion.Euler(0f, _currentAngle, 0f);
             yield return null;
         }
-
-        _token.SetRotationInProcess(false);
         _activeCoroutine = null;
     }
-
 }

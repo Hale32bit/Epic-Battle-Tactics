@@ -10,13 +10,13 @@ public class Token : WorldPointerHandler, ITokenRotatable
 {
     public const int RotationStepsCount = 4;
 
+    public event Action MovementStarted;
     public event Action RotationStepChanged;
     public event Action<AzimuthTokenPresentationState> AzimuthCameraStateChanged;
 
     [SerializeField] private TokenTextureAzimuthPresenter _azimuthPresenter;
     
     public int RotationStep { get; private set; }
-    public bool RotationInProcess { get; private set; } = false;
 
     public void SetCameraAzimuthState()
     {
@@ -34,9 +34,9 @@ public class Token : WorldPointerHandler, ITokenRotatable
         RotationStepChanged?.Invoke();
     }
 
-    void ITokenRotatable.SetRotationInProcess(bool value)
+    public void SetMovementStarted()
     {
-        RotationInProcess = value;
+        MovementStarted?.Invoke();
     }
 
     public class Factory : PlaceholderFactory<Token> { }
