@@ -33,7 +33,7 @@ public class PlayerNameTitle : MonoBehaviour
 
     private void OnTurnChanged(IPlayer obj)
     {
-        _text.text = obj.Config.Name;
+        _text.text = "Current player name is " + obj.Config.Name;
         _text.color = obj.Config.Color;
     }
 }
