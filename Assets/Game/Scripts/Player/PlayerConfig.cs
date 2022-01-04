@@ -4,12 +4,12 @@ using UnityEngine;
 
 public sealed class PlayerConfig 
 {
-    private Color _color;
-    private string _name;
+    public Color Color { get; private set; }
+    public string Name { get; private set; }
 
     public PlayerConfig(Color color, string name)
     {
-        _color = color;
-        _name = name;
+        Color = color;
+        Name = name;
     }
 }

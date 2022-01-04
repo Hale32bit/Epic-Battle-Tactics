@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class PlayerTurn : IAvaliableActionsClient
+public class PlayerTurn : IAvaliableActionsClient, IPlayerTurn
 {
     public event Action<IPlayer> TurnChanged;
 
