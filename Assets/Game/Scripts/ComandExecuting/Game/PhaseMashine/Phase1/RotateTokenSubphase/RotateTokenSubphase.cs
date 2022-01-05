@@ -45,6 +45,7 @@ namespace Phase1Space
                 if (command.Category == CommandCategory.Cancel)
                 {
                     _cellPanel.Destination.GetToken().SetRotationStep(0);
+                    _cellPanel.Destination.GetToken().SetSimpleAzimuthState();
                     _returner.Return();
                     Parent.SwitchToState<PlaceTokenSubphase>();
                 }

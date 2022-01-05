@@ -109,6 +109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tokenData: {fileID: 11400000, guid: 10c2187a453532346aed93354dc6638b, type: 2}
+  Speed: 400
 --- !u!114 &585712221323442823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,7 +162,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5636941994569653372}
-  m_Mesh: {fileID: 4300000, guid: 48e22bb1503d5b548a564e4ed72af043, type: 2}
+  m_Mesh: {fileID: 4300000, guid: 199b5b7a3da27664e852aeea6d5034c6, type: 2}
 --- !u!23 &5636941994569653375
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -181,7 +182,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0897228d902c120408bcf50ee7788c90, type: 2}
+  - {fileID: 2100000, guid: 144f9aa477c490d45a68dd103784ed9d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -216,6 +217,7 @@ GameObject:
   - component: {fileID: 6877100736653298825}
   - component: {fileID: 30415675136507405}
   - component: {fileID: 5456922420049057098}
+  - component: {fileID: 367631921850335150}
   m_Layer: 0
   m_Name: Token
   m_TagString: Untagged
@@ -324,3 +326,16 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &367631921850335150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5636941994727232784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 372d930ebc3110b4a8358634005a5f05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _edgeRenderer: {fileID: 5636941994569653375}
