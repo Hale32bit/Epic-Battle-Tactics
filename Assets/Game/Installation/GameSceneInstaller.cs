@@ -11,12 +11,11 @@ public class GameSceneInstaller : MonoInstaller
     [SerializeField] private Camera _camera;
     [SerializeField] private CameraRotation _cameraRotaion;
     [SerializeField] private PlayerInput _playerInputPrefab;
-    [SerializeField] private Token _tokenPrefab;
     [SerializeField] private Battlefield _battlefieldPrefab;
     [SerializeField] private PreCameraTokenButton _preCameraTokenPanel;
     [SerializeField] private CellPanel _cellPanel;
+    [SerializeField] private TokensSpawnPoint _tokensSpawnPoint;
 
-    [SerializeField] private GameObject _tokensSpawner;
     [SerializeField] private GameObject _cameraRotationCenter;
 
     [SerializeField] private CellPanelConfig _placeCellPanelConfig;
@@ -41,7 +40,9 @@ public class GameSceneInstaller : MonoInstaller
 
         BindUI();
 
-        BindTokenSpawner();
+        Container.BindInterfacesAndSelfTo<TokensSpawnPoint>()
+                    .FromInstance(_tokensSpawnPoint)
+                    .AsSingle();
 
         GamePhasesInstaller.Install(Container);
 
@@ -82,23 +83,8 @@ public class GameSceneInstaller : MonoInstaller
             .AsSingle();
     }
 
-    private void BindTokenSpawner()
-    {
-        BindSpawnedTokenContainer();
 
-        BindTokenFactory();
 
-        Container.BindInterfacesAndSelfTo<TokensSpawner>()
-    .FromComponentOn(_tokensSpawner)
-    .AsSingle();
-    }
-
-    private void BindSpawnedTokenContainer()
-    {
-        Container.BindInterfacesAndSelfTo<SpawnedTokenContainer>()
-                    .FromNewComponentOnNewGameObject()
-                    .AsSingle();
-    }
 
     private void BindUI()
     {
@@ -165,11 +151,7 @@ public class GameSceneInstaller : MonoInstaller
             .AsSingle();
     }
 
-    private void BindTokenFactory()
-    {
-        Container.BindFactory<Token, Token.Factory>()
-            .FromComponentInNewPrefab(_tokenPrefab);
-    }
+
 
     private void BindCamera()
     {

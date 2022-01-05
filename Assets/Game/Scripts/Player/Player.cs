@@ -9,14 +9,20 @@ using Zenject;
 public abstract class Player :  IPlayer
 {  
     public PlayerConfig Config { get; private set; }
+    public ITokenSpawner Spawner { get; private set; }
+
     public bool Active { get; private set; }
     protected AvaliableActionsList AvaliableActions;
     protected IGameCommandClient Client;
 
-    protected Player(IGameCommandClient client, PlayerConfig config)
+    protected Player(
+        IGameCommandClient client, 
+        PlayerConfig config,
+        ITokenSpawner tokenSpawner)
     {
         Client = client;
         Config = config;
+        Spawner = tokenSpawner;
     }
 
     public void Receive(AvaliableActionsList actions)

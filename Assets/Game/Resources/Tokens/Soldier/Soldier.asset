@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d7254259dfd1204fa2d2bea5fd85a2b, type: 3}
   m_Name: Soldier
   m_EditorClassIdentifier: 
-  _mainTexture: {fileID: 0}
-  _iconographicTexture: {fileID: 0}
-  _iconographicTextureRotatable: {fileID: 0}
+  _mainTexture: {fileID: 2800000, guid: b36fabf40b737474fac167ab5a98f2d1, type: 3}
+  _iconographicTexture: {fileID: 2800000, guid: 28d706f7021117b489d884224a5a9d03, type: 3}
+  _iconographicTextureRotatable: {fileID: 2800000, guid: a4379a2be627e9542836e85184cd537c, type: 3}

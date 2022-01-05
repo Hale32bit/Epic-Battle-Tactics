@@ -5,9 +5,12 @@ using UnityEngine;
 using Zenject;
 
 [DisallowMultipleComponent]
-public sealed class TokenTextureAzimuthPresenter : MonoBehaviour
+[RequireComponent(typeof(IToken))]
+public sealed class TokenQuadPresenter : MonoBehaviour, IQuadAzimuthProvider
 {
     public const float DefaultAzimuth = 0f;
+
+    [SerializeField] private QuadView _view;
 
     private AzimuthTokenPresentationState _state = AzimuthTokenPresentationState.Simple;
 
@@ -23,14 +26,25 @@ public sealed class TokenTextureAzimuthPresenter : MonoBehaviour
     
     
     private CameraRotationModel _cameraModel;
-
-    [SerializeField] private Token _token;
+    private IToken _token;
 
     [Inject]
     private void Construct(CameraRotationModel cameraModel)
     {
         _cameraModel = cameraModel;
         _state =  AzimuthTokenPresentationState.Simple;
+    }
+
+    private void Awake()
+    {
+        _token = GetComponent<IToken>();
+        Debug.Log(_token);
+    }
+
+    private void Start()
+    {
+        _view.Initialize(this);
+        _view.SetData(_token.Data);
     }
 
     private void OnEnable()

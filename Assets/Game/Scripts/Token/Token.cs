@@ -6,17 +6,31 @@ using Zenject;
 
 [RequireComponent(typeof(BoxCollider))]
 [DisallowMultipleComponent]
-public class Token : WorldPointerHandler, ITokenRotatable
+public class Token : WorldPointerHandler, ITokenRotatable, IToken
 {
     public const int RotationStepsCount = 4;
 
     public event Action MovementStarted;
     public event Action RotationStepChanged;
     public event Action<AzimuthTokenPresentationState> AzimuthCameraStateChanged;
+    public event Action<PlayerConfig> PlayerConfigChanged;
 
-    [SerializeField] private TokenTextureAzimuthPresenter _azimuthPresenter;
-    
+    [SerializeField] private TokenData _tokenData;
+    public TokenData Data => _tokenData;
+
     public int RotationStep { get; private set; }
+    public PlayerConfig PlayerConfig { get; private set; }
+
+    [Inject]
+    private void Construct(PlayerConfig playerConfig)
+    {
+        PlayerConfig = playerConfig;
+    }
+
+    private void Start()
+    {
+        PlayerConfigChanged?.Invoke(PlayerConfig);
+    }
 
     public void SetCameraAzimuthState()
     {

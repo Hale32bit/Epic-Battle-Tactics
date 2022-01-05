@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d7254259dfd1204fa2d2bea5fd85a2b, type: 3}
   m_Name: Angel
   m_EditorClassIdentifier: 
-  _mainTexture: {fileID: 0}
-  _iconographicTexture: {fileID: 0}
-  _iconographicTextureRotatable: {fileID: 0}
+  _mainTexture: {fileID: 2800000, guid: 8d0a82cc750a0a947940485681732dff, type: 3}
+  _iconographicTexture: {fileID: 2800000, guid: 19e00b4cc7581344e91043c7bacc6de2, type: 3}
+  _iconographicTextureRotatable: {fileID: 2800000, guid: f07e7df1ec91be246ac021f72c4d6b51, type: 3}

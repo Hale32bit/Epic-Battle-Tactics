@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d7254259dfd1204fa2d2bea5fd85a2b, type: 3}
   m_Name: Vampire
   m_EditorClassIdentifier: 
-  _mainTexture: {fileID: 0}
-  _iconographicTexture: {fileID: 0}
-  _iconographicTextureRotatable: {fileID: 0}
+  _mainTexture: {fileID: 2800000, guid: cc606f13eb9065040a01b431ee663f5c, type: 3}
+  _iconographicTexture: {fileID: 2800000, guid: 71f355602976eb44a841863657d6b760, type: 3}
+  _iconographicTextureRotatable: {fileID: 2800000, guid: 7c4111c37a8f132449ad91c089cd0b23, type: 3}

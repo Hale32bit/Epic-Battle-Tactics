@@ -8,10 +8,11 @@ public sealed class HotSeatPlayer : Player
 {
     public HotSeatPlayer(
         IGameCommandClient client,
-        Battlefield battlefield, 
+        Battlefield battlefield,
+        ITokenSpawner spawner,
         UIEventRoot uiRoot,
         PlayerConfig config)
-        : base(client, config)
+        : base(client, config, spawner)
     {
         uiRoot.Clicked += OnPointerEvent;
         uiRoot.PointerEnter += OnPointerEvent;

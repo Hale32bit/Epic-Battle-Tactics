@@ -1,6 +1,6 @@
 ﻿using System;
 
-internal interface IPlayerTurn
+public interface IPlayerTurn
 {
     IPlayer CurrentPlayer { get; }
 

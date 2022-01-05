@@ -8,38 +8,44 @@ using Zenject;
 
 [DisallowMultipleComponent]
 [RequireComponent(typeof(MeshRenderer))]
-[RequireComponent(typeof(TokenTextureAzimuthPresenter))]
 public class QuadView : MonoBehaviour
 {
-    [SerializeField] private TokenData _tokenData;
-
     private MeshRenderer _renderer;
-    private TokenTextureAzimuthPresenter _presenter;
+    private IQuadAzimuthProvider _azimuthProvider;
 
     private float _currentAthimuth = 0;
     [SerializeField] private  float Speed = 400f;
 
-    private void Start()
-    { 
+    private void Awake()
+    {
         _renderer = GetComponent<MeshRenderer>();
-        _presenter = GetComponent<TokenTextureAzimuthPresenter>();
-        UpdateTextureAzimuth();
-        SetTokenData(_tokenData);
     }
 
-    private void SetTokenData(TokenData data)
+    private void Start()
+    { 
+        UpdateTextureAzimuth();
+    }
+
+    internal void Initialize(IQuadAzimuthProvider azimuthProvider)
     {
-        _tokenData = data;
-        _renderer.material.SetTexture(TokenQuadMaterial.Parameters.MainTexture, _tokenData.MainTexture);
-        _renderer.material.SetTexture(TokenQuadMaterial.Parameters.Iconographic, _tokenData.IconographicTexture);
-        _renderer.material.SetTexture(TokenQuadMaterial.Parameters.IconographicRotatable, _tokenData.IconographicTextureRotatable);
+        _azimuthProvider = azimuthProvider;
     }
 
     void Update()
     {
-        _currentAthimuth = Mathf.MoveTowardsAngle(_currentAthimuth, _presenter.TargetAthimuth, Speed * Time.deltaTime);
+        _currentAthimuth = Mathf.MoveTowardsAngle(_currentAthimuth, _azimuthProvider.TargetAthimuth, Speed * Time.deltaTime);
 
         UpdateTextureAzimuth();
+    }
+
+    internal void SetData(TokenData data)
+    {
+        Debug.Log(data);
+        Debug.Log(data.MainTexture);
+
+        _renderer.material.SetTexture(TokenQuadMaterial.Parameters.MainTexture, data.MainTexture);
+        _renderer.material.SetTexture(TokenQuadMaterial.Parameters.Iconographic, data.IconographicTexture);
+        _renderer.material.SetTexture(TokenQuadMaterial.Parameters.IconographicRotatable, data.IconographicTextureRotatable);
     }
 
     private void UpdateTextureAzimuth()

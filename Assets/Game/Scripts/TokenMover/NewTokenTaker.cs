@@ -3,20 +3,20 @@ using UnityEngine;
 
 public sealed class NewTokenTaker : TokenMoverToPrecamera , INewTokenTaker 
 {
-    private ITokenSpawner _spawner;
+    private IPlayerTurn _playerTurn;
 
     public NewTokenTaker(
         ICommandsBlocker commandBlocker, 
-        IPreCameraTokenContainer preCamera, 
-        ITokenSpawner spawner) 
+        IPreCameraTokenContainer preCamera,
+        IPlayerTurn playerTurn) 
         : base(commandBlocker, preCamera)
     {
-        _spawner = spawner;
+        _playerTurn = playerTurn;
     }
 
     public void Take()
     {
-        var contanerWithNewToken = _spawner.Spawn();
+        var contanerWithNewToken = _playerTurn.CurrentPlayer.Spawner.Spawn();
         BindWithPreCamera(contanerWithNewToken);
         base.MoveToken(contanerWithNewToken, _preCamera);
     }

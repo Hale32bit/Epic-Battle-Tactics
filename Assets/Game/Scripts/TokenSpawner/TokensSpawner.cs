@@ -7,13 +7,15 @@ using UnityEngine.InputSystem;
 using Zenject;
 
 [DisallowMultipleComponent]
-public class TokensSpawner : MonoBehaviour, ITokenSpawner
+public class TokensSpawner : ITokenSpawner
 {
     private Token.Factory _factory;
     private ISpawnedTokenContainer _spawnedTokenContainer;
 
     [Inject]
-    private void Construct(Token.Factory factory, ISpawnedTokenContainer spawnedTokenContainer)
+    private TokensSpawner(
+        Token.Factory factory, 
+        ISpawnedTokenContainer spawnedTokenContainer)
     {
         _factory = factory;
         _spawnedTokenContainer = spawnedTokenContainer;
@@ -22,10 +24,8 @@ public class TokensSpawner : MonoBehaviour, ITokenSpawner
     public ISpawnedTokenContainer Spawn()
     {
         var token = _factory.Create();
-        token.transform.SetPositionAndRotation(this.transform.position, this.transform.rotation);
+        token.transform.SetPositionAndRotation(_spawnedTokenContainer.Transform.position, _spawnedTokenContainer.Transform.rotation);
         _spawnedTokenContainer.Attach(token);
         return _spawnedTokenContainer;
     }
-
-
 }

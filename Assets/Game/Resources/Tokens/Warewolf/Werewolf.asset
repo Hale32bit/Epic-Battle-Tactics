@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d7254259dfd1204fa2d2bea5fd85a2b, type: 3}
   m_Name: Werewolf
   m_EditorClassIdentifier: 
-  _mainTexture: {fileID: 0}
-  _iconographicTexture: {fileID: 0}
-  _iconographicTextureRotatable: {fileID: 0}
+  _mainTexture: {fileID: 2800000, guid: 5b2a6d85604c1a840a3bd480e913bcb1, type: 3}
+  _iconographicTexture: {fileID: 2800000, guid: 70dcc6a8cd6b4614f8a54a295c750d31, type: 3}
+  _iconographicTextureRotatable: {fileID: 2800000, guid: b6a0c4733931f0c4fb9b2758f5b02e68, type: 3}

@@ -55,7 +55,7 @@ public class PlayerTurnTest
 
     private class PlayerStab : Player
     {
-        public PlayerStab() : base(default, default)
+        public PlayerStab() : base(default, default, default)
         {
         }
     }
