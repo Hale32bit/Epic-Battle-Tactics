@@ -9,21 +9,22 @@ using Zenject;
 [DisallowMultipleComponent]
 public class TokensSpawner : ITokenSpawner
 {
-    private Token.Factory _factory;
+    private TokensBag _bag;
     private ISpawnedTokenContainer _spawnedTokenContainer;
 
     [Inject]
     private TokensSpawner(
-        Token.Factory factory, 
+        TokensBag bag, 
         ISpawnedTokenContainer spawnedTokenContainer)
     {
-        _factory = factory;
+        _bag = bag;
         _spawnedTokenContainer = spawnedTokenContainer;
+        _bag.Shuffle();
     }
 
     public ISpawnedTokenContainer Spawn()
     {
-        var token = _factory.Create();
+        var token = _bag.GetToken();
         token.transform.SetPositionAndRotation(_spawnedTokenContainer.Transform.position, _spawnedTokenContainer.Transform.rotation);
         _spawnedTokenContainer.Attach(token);
         return _spawnedTokenContainer;

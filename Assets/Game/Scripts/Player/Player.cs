@@ -8,8 +8,10 @@ using Zenject;
 [DisallowMultipleComponent]
 public abstract class Player :  IPlayer
 {  
+
     public PlayerConfig Config { get; private set; }
     public ITokenSpawner Spawner { get; private set; }
+    public ITokensBag Bag { get; private set; }
 
     public bool Active { get; private set; }
     protected AvaliableActionsList AvaliableActions;
@@ -18,11 +20,13 @@ public abstract class Player :  IPlayer
     protected Player(
         IGameCommandClient client, 
         PlayerConfig config,
-        ITokenSpawner tokenSpawner)
+        ITokenSpawner tokenSpawner,
+        ITokensBag bag)
     {
         Client = client;
         Config = config;
         Spawner = tokenSpawner;
+        Bag = bag;
     }
 
     public void Receive(AvaliableActionsList actions)

@@ -1,18 +1,27 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
-public class TokensBagInstallerBox : MonoBehaviour
+public sealed class TokensBagInstallerBox : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [Serializable]
+    public sealed class TokensBagEntry
     {
-        
+        [SerializeField] private string _tokenID;
+        public string TokenID => _tokenID;
+        [SerializeField] private int _count;
+        public int Count => _count;
     }
 
-    // Update is called once per frame
-    void Update()
+    [SerializeField] private TokensBagEntry[] _content;
+
+    public void Install(DiContainer subcontainer)
     {
-        
+        subcontainer.BindInterfacesAndSelfTo<TokensBag>()
+            .FromNew()
+            .AsSingle()
+            .WithArguments(_content, subcontainer);
     }
 }

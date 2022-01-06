@@ -304,6 +304,7 @@ Transform:
   - {fileID: 962318192}
   - {fileID: 2019479854}
   - {fileID: 1536245058}
+  - {fileID: 1668064873}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1214,7 +1215,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Vitya
   _color: {r: 0.8396226, g: 0.31628332, b: 0.20990565, a: 1}
-  _tokenPrefab: {fileID: 956961176622963565, guid: 3adc0172cec7f044b9609c94e7159301, type: 3}
+  _tokensInstallerBox: {fileID: 1536245059}
+  _tokensBagInstallerBox: {fileID: 1668064874}
 --- !u!4 &962318192
 Transform:
   m_ObjectHideFlags: 0
@@ -6591,7 +6593,7 @@ MonoBehaviour:
   - _tokenPrefab: {fileID: 684385550250211152, guid: db8241f1d757bd34e837014078ff379e, type: 3}
     _ID: Vampire2
   - _tokenPrefab: {fileID: 7735921371857462835, guid: b5dd081396f7dbd4fa8333db72feb6d8, type: 3}
-    _ID: Warewolf
+    _ID: Werewolf
 --- !u!1 &1556447806
 GameObject:
   m_ObjectHideFlags: 0
@@ -6855,6 +6857,66 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _markerPrefab: {fileID: 7609032570825407940, guid: 56606181a83af57448eecb11244f1fdd, type: 3}
+--- !u!1 &1668064872
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1668064873}
+  - component: {fileID: 1668064874}
+  m_Layer: 0
+  m_Name: TokensBagInstallerBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1668064873
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668064872}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 134375524}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1668064874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668064872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56f66a75d17967e42916ce325ed25d73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _content:
+  - _tokenID: Archer
+    _count: 1
+  - _tokenID: Angel
+    _count: 1
+  - _tokenID: Knight
+    _count: 1
+  - _tokenID: Berserk
+    _count: 1
+  - _tokenID: Vampire
+    _count: 1
+  - _tokenID: Vampire2
+    _count: 1
+  - _tokenID: Werewolf
+    _count: 1
+  - _tokenID: Soldier
+    _count: 1
 --- !u!1 &1715056527
 GameObject:
   m_ObjectHideFlags: 0
@@ -7385,7 +7447,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Masha
   _color: {r: 0.2494215, g: 0.39091593, b: 0.8962264, a: 1}
-  _tokenPrefab: {fileID: 956961176622963565, guid: 3adc0172cec7f044b9609c94e7159301, type: 3}
+  _tokensInstallerBox: {fileID: 1536245059}
+  _tokensBagInstallerBox: {fileID: 1668064874}
 --- !u!4 &2019479854
 Transform:
   m_ObjectHideFlags: 0

@@ -7,15 +7,14 @@ public sealed class PlayerInstallerBox : MonoBehaviour
 {
     [SerializeField] private string _name;
     [SerializeField] private Color _color;
-    [SerializeField] private Token _tokenPrefab;
     [SerializeField] private TokensInstallerBox _tokensInstallerBox;
+    [SerializeField] private TokensBagInstallerBox _tokensBagInstallerBox;
+
 
     public void Install(DiContainer subcontainer)
     {
         _tokensInstallerBox.Install(subcontainer);
-
-        subcontainer.BindFactory<Token, Token.Factory>()
-            .FromComponentInNewPrefab(_tokenPrefab);
+        _tokensBagInstallerBox.Install(subcontainer);
 
         subcontainer.BindInterfacesAndSelfTo<TokensSpawner>()
             .FromNew()

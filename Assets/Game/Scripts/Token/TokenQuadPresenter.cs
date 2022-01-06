@@ -24,7 +24,6 @@ public sealed class TokenQuadPresenter : MonoBehaviour, IQuadAzimuthProvider
                 throw new Exception("TargetAthimuth cant be defined");
         } }
     
-    
     private CameraRotationModel _cameraModel;
     private IToken _token;
 
@@ -38,7 +37,6 @@ public sealed class TokenQuadPresenter : MonoBehaviour, IQuadAzimuthProvider
     private void Awake()
     {
         _token = GetComponent<IToken>();
-        Debug.Log(_token);
     }
 
     private void Start()

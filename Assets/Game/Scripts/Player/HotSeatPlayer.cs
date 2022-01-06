@@ -11,8 +11,9 @@ public sealed class HotSeatPlayer : Player
         Battlefield battlefield,
         ITokenSpawner spawner,
         UIEventRoot uiRoot,
-        PlayerConfig config)
-        : base(client, config, spawner)
+        PlayerConfig config,
+        ITokensBag bag)
+        : base(client, config, spawner, bag)
     {
         uiRoot.Clicked += OnPointerEvent;
         uiRoot.PointerEnter += OnPointerEvent;
