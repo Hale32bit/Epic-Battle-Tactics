@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mainTexture: {fileID: 2800000, guid: 7e0450408a14ad942bab3d2a556288ee, type: 3}
   _iconographicTexture: {fileID: 2800000, guid: 239ee8c973984494e95926c084c7ecac, type: 3}
-  _iconographicTextureRotatable: {fileID: 2800000, guid: 4d5cae08af181ad4cac86aa7fd1f4fe6, type: 3}
+  _iconographicTextureRotatable: {fileID: 2800000, guid: 36ea5aec9d9c73e48ad553e7882b9038, type: 3}
