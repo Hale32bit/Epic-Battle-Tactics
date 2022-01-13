@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Soldier
   m_EditorClassIdentifier: 
   _mainTexture: {fileID: 2800000, guid: b36fabf40b737474fac167ab5a98f2d1, type: 3}
-  _iconographicTexture: {fileID: 2800000, guid: 28d706f7021117b489d884224a5a9d03, type: 3}
-  _iconographicTextureRotatable: {fileID: 2800000, guid: abe40da5b1bc2e04d821829c6d5cf8e4, type: 3}
+  _iconographicTexture: {fileID: 2800000, guid: f2a4b2f235746fd4faab478fe61e1155, type: 3}
+  _iconographicTextureRotatable: {fileID: 2800000, guid: 1bddb2a215e22864d94e6f31e9f9930d, type: 3}

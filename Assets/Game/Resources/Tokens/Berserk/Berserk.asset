@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Berserk
   m_EditorClassIdentifier: 
   _mainTexture: {fileID: 2800000, guid: 7e0450408a14ad942bab3d2a556288ee, type: 3}
-  _iconographicTexture: {fileID: 2800000, guid: 239ee8c973984494e95926c084c7ecac, type: 3}
-  _iconographicTextureRotatable: {fileID: 2800000, guid: 36ea5aec9d9c73e48ad553e7882b9038, type: 3}
+  _iconographicTexture: {fileID: 2800000, guid: 0536c1e43473a484e97162af8def34dc, type: 3}
+  _iconographicTextureRotatable: {fileID: 2800000, guid: 99a4bdc04a11f6940b1c7f805893cbef, type: 3}

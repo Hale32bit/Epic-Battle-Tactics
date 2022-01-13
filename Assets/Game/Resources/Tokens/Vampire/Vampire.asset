@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Vampire
   m_EditorClassIdentifier: 
   _mainTexture: {fileID: 2800000, guid: cc606f13eb9065040a01b431ee663f5c, type: 3}
-  _iconographicTexture: {fileID: 2800000, guid: 71f355602976eb44a841863657d6b760, type: 3}
-  _iconographicTextureRotatable: {fileID: 2800000, guid: ee13d5ef0dfad0040ac5f8beb7146384, type: 3}
+  _iconographicTexture: {fileID: 2800000, guid: f2a4b2f235746fd4faab478fe61e1155, type: 3}
+  _iconographicTextureRotatable: {fileID: 2800000, guid: abe40da5b1bc2e04d821829c6d5cf8e4, type: 3}

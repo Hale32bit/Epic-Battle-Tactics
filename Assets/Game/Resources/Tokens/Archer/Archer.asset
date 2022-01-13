@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Archer
   m_EditorClassIdentifier: 
   _mainTexture: {fileID: 2800000, guid: 0c7688d600880ba43916f2f3016a83c8, type: 3}
-  _iconographicTexture: {fileID: 2800000, guid: 2d9e00c624be5b446ab05c5f418530d2, type: 3}
+  _iconographicTexture: {fileID: 2800000, guid: f6c3fd2523bed0d49a3454b658f292a8, type: 3}
   _iconographicTextureRotatable: {fileID: 2800000, guid: ef5c5eef96b7a4d43aa8200f5c71799d, type: 3}
