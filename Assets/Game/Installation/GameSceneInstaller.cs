@@ -72,6 +72,14 @@ public class GameSceneInstaller : MonoInstaller
         Container.Bind<CameraRotation>()
             .FromInstance(_cameraRotaion)
             .AsSingle();
+
+        Container.BindInterfacesAndSelfTo<WorldPointerInput>()
+            .FromNew()
+            .AsSingle();
+
+        Container.BindInterfacesAndSelfTo<WorldPointerHandler_new>()
+            .FromNew()
+            .AsSingle();
     }
 
     private void BindTokenMovers()

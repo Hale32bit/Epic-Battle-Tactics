@@ -1,18 +1,27 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TokenPresentationPanel : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private Image _edge;
+    [SerializeField] private RawImage _picture;
+    [SerializeField] private RawImage _iconographic;
+    [SerializeField] private RawImage _iconographic2;
+
+    internal void Close()
     {
-        
+        this.gameObject.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
+    internal void Launch(IToken token)
     {
-        
+        this.gameObject.SetActive(true);
+        _edge.color = token.PlayerConfig.Color;
+        _picture.texture = token.Data.MainTexture;
+        _iconographic.texture = token.Data.IconographicTexture;
+        _iconographic2.texture = token.Data.IconographicTextureRotatable;
     }
 }
