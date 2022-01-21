@@ -17,7 +17,7 @@ public class GameSceneInstaller : MonoInstaller
     [SerializeField] private TokensSpawnPoint _tokensSpawnPoint;
 
     [SerializeField] private GameObject _cameraRotationCenter;
-    [SerializeField] private TokenPresentationPanel _presentationPanelInstanse;
+    [SerializeField] private TokenPresentationPanelView _presentationPanelInstanse;
 
     [SerializeField] private CellPanelConfig _placeCellPanelConfig;
     [SerializeField] private CellPanelConfig _rotateCellPanelConfig;
@@ -46,7 +46,7 @@ public class GameSceneInstaller : MonoInstaller
                     .FromInstance(_tokensSpawnPoint)
                     .AsSingle();
 
-        Container.BindInterfacesAndSelfTo<TokenPresentationPanel>()
+        Container.BindInterfacesAndSelfTo<TokenPresentationPanelView>()
             .FromInstance(_presentationPanelInstanse)
             .AsSingle();
 

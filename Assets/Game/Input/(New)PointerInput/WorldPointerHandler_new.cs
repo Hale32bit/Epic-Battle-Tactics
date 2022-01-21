@@ -29,14 +29,14 @@ public sealed class WorldPointerHandler_new : ITickable
     private void OnRightClicked()
     {
         GameObject obj = TryGetObjectByCameraRaycast();
-        var eventData = new WorldPointerEventDataNew(obj, WorldPointerEventType.LeftClick);
+        var eventData = new WorldPointerEventDataNew(obj, WorldPointerEventType.RightClick);
         Clicked?.Invoke(eventData);
     }
 
     private void OnLeftClicked()
     {
         GameObject obj = TryGetObjectByCameraRaycast();
-        var eventData = new WorldPointerEventDataNew(obj, WorldPointerEventType.RightClick);
+        var eventData = new WorldPointerEventDataNew(obj, WorldPointerEventType.LeftClick);
         Clicked?.Invoke(eventData);
     }
 

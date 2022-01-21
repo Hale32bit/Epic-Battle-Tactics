@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-[RequireComponent(typeof(BoxCollider))]
+[RequireComponent(typeof(BoxCollider), typeof(TokenGeometry))]
 [DisallowMultipleComponent]
 public class Token : WorldPointerHandler, ITokenRotatable, IToken
 {
@@ -19,12 +19,18 @@ public class Token : WorldPointerHandler, ITokenRotatable, IToken
     public TokenData Data => _tokenData;
 
     public int RotationStep { get; private set; }
+    public TokenGeometry Geometry { get; private set; }
     public PlayerConfig PlayerConfig { get; private set; }
 
     [Inject]
     private void Construct(PlayerConfig playerConfig)
     {
         PlayerConfig = playerConfig;
+    }
+
+    private void Awake()
+    {
+        Geometry = GetComponent<TokenGeometry>();
     }
 
     private void Start()

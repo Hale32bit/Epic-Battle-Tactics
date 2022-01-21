@@ -2,26 +2,63 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using Zenject;
 
-public class TokenPresentationPanel : MonoBehaviour
+[DisallowMultipleComponent]
+public sealed class TokenPresentationPanel : MonoBehaviour
 {
-    [SerializeField] private Image _edge;
-    [SerializeField] private RawImage _picture;
-    [SerializeField] private RawImage _iconographic;
-    [SerializeField] private RawImage _iconographic2;
+    public event Action<IToken> TokenSelected;
+    public event Action Closed;
 
-    internal void Close()
+    public IToken SelectedToken { get; private set; } = null;
+
+    private WorldPointerHandler_new _pointerHandler;
+
+    [Inject]
+    private void Construct(WorldPointerHandler_new pointerHandler)
     {
-        this.gameObject.SetActive(false);
+        _pointerHandler = pointerHandler;
     }
 
-    internal void Launch(IToken token)
+    private void Awake()
     {
-        this.gameObject.SetActive(true);
-        _edge.color = token.PlayerConfig.Color;
-        _picture.texture = token.Data.MainTexture;
-        _iconographic.texture = token.Data.IconographicTexture;
-        _iconographic2.texture = token.Data.IconographicTextureRotatable;
+        _pointerHandler.Clicked += OnClicked;
+    }
+
+    private void OnDestroy()
+    {
+        _pointerHandler.Clicked -= OnClicked;
+    }
+
+    private void OnClicked(WorldPointerEventDataNew data)
+    {
+        if (data.EventType == WorldPointerEventType.RightClick &&
+            data.Object != null &&
+            data.Object.TryGetComponent<IToken>(out IToken token))
+        {
+            LauchPanel(token);
+            return;
+        }
+
+        if (data.Object != null &&
+            data.Object.Is<TokenPresentationPanel>())
+            return;
+        
+        ClosePanel();
+    }
+
+    private void LauchPanel(IToken token)
+    {
+        SelectedToken = token;
+        TokenSelected?.Invoke(SelectedToken);
+    }
+
+    private void ClosePanel()
+    {
+        if (SelectedToken != null)
+        {
+            SelectedToken = null;
+            Closed?.Invoke();
+        }
     }
 }
